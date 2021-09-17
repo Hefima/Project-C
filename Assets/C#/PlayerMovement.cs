@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 walking;
     Vector3 running;
 
+    Vector3 velocity;
+
     public float speed = 5f;
     public float runSpeed = 10f;
 
@@ -41,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
 
         if (input.magnitude >= 0.1f)
         {
@@ -77,11 +78,14 @@ public class PlayerMovement : MonoBehaviour
             con.Move(walking * Time.deltaTime);
         }
 
+        velocity.y += gravity;
+
+        con.Move(velocity * Time.deltaTime);
         Inputs();
 
-        Jump();
+        //Jump();
 
-        myGravity();
+        //myGravity();
     }
 
     void myGravity()
@@ -111,9 +115,11 @@ public class PlayerMovement : MonoBehaviour
         {
             print("jump");
             isJumping = true;
+            anim.SetBool("isJumping", true);
             //moveDir.y = initialJumpVelocity;
         } else if (!isJumpPressed && isJumping && con.isGrounded)
         {
+            anim.SetBool("isJumping", false);
             isJumping = false;
         }
     }

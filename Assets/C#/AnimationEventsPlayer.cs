@@ -9,6 +9,7 @@ public class AnimationEventsPlayer : MonoBehaviour
 
     public void StopMove()
     {
+        print("test");
         if (testMove.moveAllowed)
             testMove.moveAllowed = false;
         else

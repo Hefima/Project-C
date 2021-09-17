@@ -15,12 +15,12 @@ public class TestMove : MonoBehaviour
 
     //Jump
     public bool jumpPressed = false;
-    bool isJumping = false;
+    public bool isJumping;
     float initialJumpVelocity;
     public float maxJumpHeight = 1f;
     public float maxJumpTime = 0.5f;
     //public float jumpHeight = 2f;
-    bool isFalling;
+    public bool isFalling;
     float fallTime;
 
     //Gravity
@@ -31,7 +31,7 @@ public class TestMove : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-    bool isGrounded;
+    public bool isGrounded;
 
 
 
@@ -50,7 +50,7 @@ public class TestMove : MonoBehaviour
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        jumpPressed = Input.GetKeyDown(KeyCode.Space);
+        jumpPressed = Input.GetKey(KeyCode.Space);
 
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -136,7 +136,6 @@ public class TestMove : MonoBehaviour
     {
         if (!isJumping && isGrounded && jumpPressed)
         {
-            print("jump");
             isJumping = true;
             velocity.y = initialJumpVelocity;
             anim.SetBool("isJumping", true);
@@ -146,5 +145,10 @@ public class TestMove : MonoBehaviour
             anim.SetBool("isJumping", false);
             isJumping = false;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawSphere(groundCheck.position, groundDistance);
     }
 }

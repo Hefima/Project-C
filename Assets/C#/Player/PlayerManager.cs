@@ -8,8 +8,13 @@ public class PlayerManager : MonoBehaviour
 
     //references
     public InputKeys IK;
-    public PlayerCam PC;
+    public PlayerCam Cam;
     public PlayerMove PM;
+    public PlayerCombat PC;
+
+    //PlayerInfo
+    [SerializeField]
+    public PlayerStats playerStats;
 
     void Awake()
     {

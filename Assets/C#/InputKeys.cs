@@ -6,6 +6,12 @@ public class InputKeys : MonoBehaviour
 {
     public float AxisX, AxisY;
 
+    public bool input_Mouse0;
+    public bool input_Mouse1;
+
+    public bool input_Shift;
+    public bool input_Space;
+
     void Update()
     {
         AxisX = Input.GetAxisRaw("Horizontal");
@@ -25,5 +31,11 @@ public class InputKeys : MonoBehaviour
                     break;
             }
         }
+
+        input_Shift = Input.GetKey(KeyCode.LeftShift);
+        input_Space = Input.GetKey(KeyCode.Space);
+
+        input_Mouse0 = Input.GetMouseButton(0);
+        input_Mouse1 = Input.GetMouseButton(1);
     }
 }

@@ -129,8 +129,6 @@ public class TestMove : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initialJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-
-
     }
     void Jump()
     {
@@ -139,6 +137,7 @@ public class TestMove : MonoBehaviour
             isJumping = true;
             velocity.y = initialJumpVelocity;
             anim.SetBool("isJumping", true);
+            anim.SetTrigger("jump");
         }
         else if (!jumpPressed && isJumping && isGrounded)
         {

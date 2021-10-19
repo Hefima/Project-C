@@ -14,6 +14,8 @@ public class PlayerCombat : MonoBehaviour
 
     public int basicAttack;
 
+    public float turnSmoothTime = 0.1f;
+    float turnSmoothVelocity;
 
     private void Start()
     {
@@ -30,9 +32,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     void BasicAttack()
-    {
-        
-
+    {      
         if (Time.time >= attackBuffer)
         {
             basicAttack = 0;
@@ -43,32 +43,37 @@ public class PlayerCombat : MonoBehaviour
             attackBuffer = Time.time + attackDuration;
             nextAttack = Time.time + attackCD;
 
+            this.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.cam.eulerAngles.y, 0f);
+
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, PlayerManager.acc.PM.cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
             Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
             if (basicAttack == 0)
             {
-                for (int i = 0; i < enemiesHit.Length; i++)
-                {
-                    Debug.Log("YOU HIT: " + enemiesHit[i].name + "With" + basicAttack);
-                }
+                DamageEnemy(enemiesHit);
                 basicAttack ++;
             }
             else if(basicAttack == 1)
             {
-                for (int i = 0; i < enemiesHit.Length; i++)
-                {
-                    Debug.Log("YOU HIT: " + enemiesHit[i].name + "With" + basicAttack);
-                }
+                DamageEnemy(enemiesHit);
                 basicAttack++;
             }
             else if(basicAttack == 2)
             {
-                for (int i = 0; i < enemiesHit.Length; i++)
-                {
-                    Debug.Log("YOU HIT: " + enemiesHit[i].name + "With" + basicAttack);
-                }
+                DamageEnemy(enemiesHit);
                 basicAttack = 0;
             }
+        }
+    }
+
+    void DamageEnemy(Collider[] enemies)
+    {
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            Debug.Log("YOU HIT: " + enemies[i].name + "With" + basicAttack);
+            enemies[i].GetComponent<EnemyManager>().TakeDamage(PlayerManager.acc.playerStats.attackDamage);
         }
     }
 

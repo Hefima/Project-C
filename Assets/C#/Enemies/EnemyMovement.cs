@@ -43,7 +43,7 @@ public class EnemyMovement : MonoBehaviour
             moving = false;
         }
 
-        SearchPlayer();
+        //SearchPlayer();
     }
 
     void MoveEnemy()

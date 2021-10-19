@@ -103,7 +103,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1118274932695577806}
-    m_Position: {x: 861.6156, y: 247.22713, z: 0}
+    m_Position: {x: 860, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1945261212197994372}
     m_Position: {x: 610, y: 290, z: 0}
@@ -186,9 +186,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: jump
     m_EventTreshold: 0
-  - m_ConditionMode: 1
-    m_ConditionEvent: play
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3176047584487000710}
   m_Solo: 0
@@ -216,6 +213,9 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: isFalling
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: play
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8030553172131045326}
@@ -422,37 +422,37 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isRunning
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isFalling
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isJumping
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: jump
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: play
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

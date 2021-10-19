@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5ebd1bcf7097eb247b1bb98501e0bfe0, type: 2}
 --- !u!1 &5391362
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &20075382
 BoxCollider:
@@ -1012,8 +1012,11 @@ GameObject:
   - component: {fileID: 320205232}
   - component: {fileID: 320205231}
   - component: {fileID: 320205230}
+  - component: {fileID: 320205235}
+  - component: {fileID: 320205234}
+  - component: {fileID: 320205236}
   m_Layer: 6
-  m_Name: Enemy1
+  m_Name: Beni
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1090,12 +1093,69 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320205229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.87, y: 1.17, z: 0}
+  m_LocalPosition: {x: 5.6, y: 1.17, z: 4.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &320205234
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320205229}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &320205235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320205229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5dca2e9a1bd024295beee42639faa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyObj: {fileID: 320205229}
+  startPos: {fileID: 0}
+  moveRadius: 10
+  attackRadius: 0
+  stopDis: 0.5
+  playerSearchRadius: 4
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  stopTime: 5
+--- !u!135 &320205236
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320205229}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 14.91
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &323637560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2763,7 +2823,15 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftHandThumb1'\n\tTransform
+    'mixamorig:Neck'\n\tTransform 'mixamorig:Head'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
+    'mixamorig:LeftLeg'\n\tTransform 'mixamorig:RightShoulder'\n\tTransform 'mixamorig:Spine'\n\tTransform
+    'mixamorig:LeftHandMiddle3'\n\tTransform 'mixamorig:RightForeArm'\n\tand more
+    ...\n\tFrom animation clip 'Jump'\n\tFrom animation clip 'a_Idle_Happy'\n\tFrom
+    animation clip 'a_Running'\n\tFrom animation clip 'a_Walking'\n\tFrom animation
+    clip 'Falling To Landing'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -5033,7 +5101,7 @@ GameObject:
   - component: {fileID: 1381372781}
   - component: {fileID: 1381372779}
   - component: {fileID: 1381372782}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player (1)
   m_TagString: Player
   m_Icon: {fileID: 0}

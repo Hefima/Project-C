@@ -24,6 +24,8 @@ public class EnemyIdleState : EnemyBaseState
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         startPos = enemyObj.transform;
         Debug.LogWarning(enemyObj.name + ": Idle State");
+
+        navMesh.speed = navMesh.speed / 2;
     }
 
     public override void UpdateState(EnemyStateManager enemy)

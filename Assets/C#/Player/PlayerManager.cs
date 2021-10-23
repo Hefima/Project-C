@@ -8,7 +8,8 @@ public class PlayerManager : MonoBehaviour
 
     //references
     public PlayerCombat PC;
-    public NewMove PM;
+    public PlayerMove PM;
+    public Inventory Inv;
 
     //PlayerInfo
     [SerializeField]
@@ -16,6 +17,11 @@ public class PlayerManager : MonoBehaviour
 
     void Awake()
     {
+        if(acc != null)
+        {
+            Debug.LogWarning("More than one instance of PlayerManager found!");
+            return;
+        }
         acc = this;
     }
 }

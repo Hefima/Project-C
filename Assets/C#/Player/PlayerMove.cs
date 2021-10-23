@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     public CharacterController controller;
     public Animator anim;
@@ -34,7 +34,8 @@ public class NewMove : MonoBehaviour
     public bool isGrounded;
 
     //Cam
-    public Transform cam;
+    public GameObject cam;
+    public GameObject moveRotation;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
@@ -78,12 +79,13 @@ public class NewMove : MonoBehaviour
 
         if (input.magnitude > 0.1f)
         {
-            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
+            //moveRotation.transform.Rot = new Quaternion(0f, cam.transform.rotation.y, 0f, 0f);
 
-            move = cam.forward * input.y + cam.right * input.x;
+            move = cam.transform.forward * input.y + cam.transform.right * input.x;
 
             if (GameManager.acc.IK.input_Shift && isGrounded && moveAllowed)
             {

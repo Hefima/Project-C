@@ -43,9 +43,9 @@ public class PlayerCombat : MonoBehaviour
             attackBuffer = Time.time + attackDuration;
             nextAttack = Time.time + attackCD;
 
-            this.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.cam.eulerAngles.y, 0f);
+            this.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.cam.transform.eulerAngles.y, 0f);
 
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, PlayerManager.acc.PM.cam.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, PlayerManager.acc.PM.cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);

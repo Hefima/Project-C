@@ -14,6 +14,8 @@ public class EnemyAttackingState : EnemyBaseState
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         Debug.LogWarning(enemyObj.name + ": Attacking State");
+
+        navMesh.speed = navMesh.speed * 2;
     }
 
     public override void UpdateState(EnemyStateManager enemy)

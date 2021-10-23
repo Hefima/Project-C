@@ -27,7 +27,7 @@ public class InputKeys : MonoBehaviour
             switch (Input.inputString.ToUpper())
             {
                 case "I":
-                    
+                    PlayerManager.acc.Inv.ToggleInv();
                     break;
             }
         }

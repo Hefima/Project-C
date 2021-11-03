@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum EquipmentType
@@ -12,18 +10,21 @@ public enum EquipmentType
     Gloves,
     Boots,
 }
-
+[CreateAssetMenu(fileName = "New Equipment Object", menuName = "Inventory System/Items/Equipment")]
 public class EquipmentObject : ItemObject
 {
-    private void Awake()
-    {
-        type = ItemType.Equipment;
-    }
-    EquipmentType equipmentType;
+    public EquipmentType equipmentType;
 
     public float damage;
     public float attackSpeed;
 
     public float defense;
     public int health;
+    public int Agility;
+    public float Mana;
+     
+    private void Awake()
+    {
+        type = ItemType.Equipment;
+    }
 }

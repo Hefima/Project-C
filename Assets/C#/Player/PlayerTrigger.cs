@@ -6,10 +6,10 @@ public class PlayerTrigger : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Collectable" && Input.GetKeyDown(KeyCode.E))
+        var item = other.GetComponent<ItemHolder>();
+        if (item && GameManager.acc.IK.input_E)
         {
-            print("collect: " + other.name);
-            PlayerManager.acc.Inv.Add(other.GetComponent<ItemHolder>().item);
+            PlayerManager.acc.PInv.inventory.AddItem(item.item, 1);
             Destroy(other.gameObject);
         }
     }

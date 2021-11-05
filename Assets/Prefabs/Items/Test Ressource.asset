@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b7d41dc9dfdb3c46ae036228636df81, type: 3}
-  m_Name: New Consumable Object
+  m_Script: {fileID: 11500000, guid: 25c07ad6a72dd8a45940dbd14a81e41b, type: 3}
+  m_Name: Test Ressource
   m_EditorClassIdentifier: 
-  name: 
-  type: 2
-  prefab: {fileID: 0}
+  name: Test Ressource
+  type: 3
+  prefab: {fileID: 919132149155446097, guid: 1c08e12da51fdc0498fbb2c801f182fe, type: 3}
   maxCarryAmount: 0
-  restoreHealthValue: 0
+  equipmentInfo: 

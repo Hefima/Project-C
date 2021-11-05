@@ -11,6 +11,7 @@ public class InputKeys : MonoBehaviour
 
     public bool input_Shift;
     public bool input_Space;
+    public bool input_E;
 
     void Update()
     {
@@ -27,10 +28,12 @@ public class InputKeys : MonoBehaviour
             switch (Input.inputString.ToUpper())
             {
                 case "I":
-                    PlayerManager.acc.Inv.ToggleInv();
+                    GameManager.acc.UI.ToggleUI(GameManager.acc.UI.InventoryUI);
                     break;
             }
         }
+
+        input_E = Input.GetKeyDown(KeyCode.E);
 
         input_Shift = Input.GetKey(KeyCode.LeftShift);
         input_Space = Input.GetKey(KeyCode.Space);

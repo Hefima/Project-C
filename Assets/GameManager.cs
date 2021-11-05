@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager acc;
 
     public InputKeys IK;
+    public UIManager UI;
 
     private void Awake()
     {

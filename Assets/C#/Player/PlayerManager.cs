@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerCombat PC;
     public PlayerMove PM;
     public Inventory Inv;
+    public PlayerInventory PInv;
 
     //PlayerInfo
     [SerializeField]

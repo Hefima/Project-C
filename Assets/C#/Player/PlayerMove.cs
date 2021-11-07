@@ -83,9 +83,9 @@ public class PlayerMove : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            //moveRotation.transform.Rot = new Quaternion(0f, cam.transform.rotation.y, 0f, 0f);
+            moveRotation.transform.eulerAngles = new Vector3(0f, cam.transform.eulerAngles.y, 0f);
 
-            move = cam.transform.forward * input.y + cam.transform.right * input.x;
+            move = moveRotation.transform.forward * input.y + moveRotation.transform.right * input.x;
 
             if (GameManager.acc.IK.input_Shift && isGrounded && moveAllowed)
             {

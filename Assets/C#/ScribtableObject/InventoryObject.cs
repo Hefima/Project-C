@@ -14,7 +14,7 @@ public class InventoryObject : ScriptableObject
         {
             if(inventorySlots[i].item == _item)
             {
-                if(inventorySlots[i].amount + _amount !> _item.maxCarryAmount)
+                if(inventorySlots[i].amount + _amount <= _item.maxCarryAmount)
                 {
                     inventorySlots[i].AddAmount(_amount);
                 }
@@ -24,6 +24,8 @@ public class InventoryObject : ScriptableObject
                 }
                 hasItem = true;
                 break;
+
+                //if(typeof(EquipmentObject).IsAssignableFrom(typeof(ItemObject)))
             }
         }
         if (!hasItem)

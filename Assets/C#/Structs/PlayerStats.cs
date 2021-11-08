@@ -10,4 +10,6 @@ public struct PlayerStats
 
     public float baseAtkSpeed;
     public float attackSpeed;
+
+    public int bonusAttackSpeed;
 }

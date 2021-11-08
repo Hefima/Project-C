@@ -14,6 +14,7 @@ public class EnemyStateManager : MonoBehaviour
     //Enemy
     public float sightRange;
     public LayerMask playerMask;
+    public Transform attackpoint;
 
     public float stopDis;
 

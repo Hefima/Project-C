@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     //PlayerInfo
     [SerializeField]
     public PlayerStats playerStats;
+    public int currentHealth;
 
     void Awake()
     {
@@ -24,5 +26,22 @@ public class PlayerManager : MonoBehaviour
             return;
         }
         acc = this;
+    }
+
+    private void Start()
+    {
+        currentHealth = playerStats.health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("U DIED");
     }
 }

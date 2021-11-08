@@ -12,4 +12,6 @@ public struct EnemyStats
     public float attackSpeed;
 
     public float moveSpeed;
+
+    public float attackRange;
 }

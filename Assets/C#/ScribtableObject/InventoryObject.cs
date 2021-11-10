@@ -12,7 +12,7 @@ public class InventoryObject : ScriptableObject
         bool hasItem = false;
         for (int i = 0; i < inventorySlots.Count; i++)
         {
-            if(inventorySlots[i].item == _item)
+            if(inventorySlots[i].item == _item && _item.type != ItemType.Equipment)
             {
                 if(inventorySlots[i].amount + _amount <= _item.maxCarryAmount)
                 {
@@ -24,8 +24,6 @@ public class InventoryObject : ScriptableObject
                 }
                 hasItem = true;
                 break;
-
-                //if(typeof(EquipmentObject).IsAssignableFrom(typeof(ItemObject)))
             }
         }
         if (!hasItem)

@@ -12,11 +12,15 @@ public class PlayerInventory : MonoBehaviour
     {
         inventory.OnAddItem += OnSlotCreate;
     }
+
     public void OnSlotCreate(object sender, InventoryObject.OnAddItemEventArgs e)
     {
         Debug.Log("Instantiate");
         GameObject g = Instantiate(slotPrefab, parentTransform);
-        g.GetComponent<InventorySlotHolder>().info = new InventorySlot(e.item, e.amount);
+        g.GetComponent<InventorySlotHolder>().info = e.slot;
+        g.GetComponent<InventorySlotHolder>().info.slotObj = g;
+        g.GetComponent<InventorySlotHolder>().info.item = e.item;
+        g.GetComponent<InventorySlotHolder>().info.amount = e.amount;
     }
 
     public void OnApplicationQuit()

@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class InventorySlotHolder : MonoBehaviour
 {
-    public InventorySlot info;
-
+    public InventorySlot info = new InventorySlot(null, 1);
 }

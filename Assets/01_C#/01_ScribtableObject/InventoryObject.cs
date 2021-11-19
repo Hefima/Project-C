@@ -7,6 +7,12 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> inventorySlots = new List<InventorySlot>();
+    public event EventHandler<OnAddItemEventArgs> OnAddItem;
+    public class OnAddItemEventArgs : EventArgs
+    {
+        public ItemObject item;
+        public int amount;
+    }
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
@@ -26,9 +32,12 @@ public class InventoryObject : ScriptableObject
                 break;
             }
         }
+
         if (!hasItem)
         {
+            Debug.Log("Inv Add");
             inventorySlots.Add(new InventorySlot(_item, _amount));
+            OnAddItem?.Invoke(this, new OnAddItemEventArgs { item = _item, amount = _amount });
         }
     }
 }
@@ -44,8 +53,8 @@ public class InventorySlot
         amount = _amount;
     }
 
-    public void AddAmount(int value)
+    public void AddAmount(int _value)
     {
-        amount += value;
+        amount += _value;
     }
 }

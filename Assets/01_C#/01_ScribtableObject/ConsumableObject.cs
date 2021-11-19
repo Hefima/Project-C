@@ -8,5 +8,6 @@ public class ConsumableObject : ItemObject
     public void Awake()
     {
         type = ItemType.Consumable;
+        consumableInfo = this;
     }
 }

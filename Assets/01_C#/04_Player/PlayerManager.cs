@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     //references
     public PlayerCombat PC;
     public PlayerMove PM;
-    public Inventory Inv;
+    public PlayerInventory Inv;
     public PlayerInventory PInv;
 
     //PlayerInfo

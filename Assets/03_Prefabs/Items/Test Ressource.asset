@@ -15,5 +15,8 @@ MonoBehaviour:
   name: Test Ressource
   type: 3
   prefab: {fileID: 919132149155446097, guid: 1c08e12da51fdc0498fbb2c801f182fe, type: 3}
-  maxCarryAmount: 0
+  maxCarryAmount: 5
+  equipInfo: {fileID: 0}
+  ressourceInfo: {fileID: 0}
+  consumableInfo: {fileID: 0}
   equipmentInfo: 

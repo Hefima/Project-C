@@ -7,5 +7,6 @@ public class RessourceObject : ItemObject
     private void Awake()
     {
         type = ItemType.Ressource;
+        ressourceInfo = this;
     }
 }

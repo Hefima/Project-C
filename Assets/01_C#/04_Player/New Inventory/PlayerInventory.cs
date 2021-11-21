@@ -10,17 +10,21 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        inventory.OnAddItem += OnSlotCreate;
+        inventory.OnSlotCreate += OnSlotCreate;
     }
 
-    public void OnSlotCreate(object sender, InventoryObject.OnAddItemEventArgs e)
+    public void OnSlotCreate(object sender, InventoryObject.OnSlotCreateEventArgs e)
     {
-        Debug.Log("Instantiate");
         GameObject g = Instantiate(slotPrefab, parentTransform);
         g.GetComponent<InventorySlotHolder>().info = e.slot;
         g.GetComponent<InventorySlotHolder>().info.slotObj = g;
-        g.GetComponent<InventorySlotHolder>().info.item = e.item;
-        g.GetComponent<InventorySlotHolder>().info.amount = e.amount;
+        if (e.slot.item.image != null)
+        {
+            g.GetComponent<InventorySlotHolder>().image.sprite = e.slot.item.image;
+            g.GetComponent<InventorySlotHolder>().image.enabled = true;
+        }
+        else
+            GameManager.acc.DM.DebugLog("Item image Missing: " + e.slot.item.name, DebugType.ITEMDEBUG);
     }
 
     public void OnApplicationQuit()

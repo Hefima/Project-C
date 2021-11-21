@@ -13,6 +13,7 @@ public enum EquipmentType
 [CreateAssetMenu(fileName = "New Equipment Object", menuName = "Inventory System/Items/Equipment")]
 public class EquipmentObject : ItemObject
 {
+    [Header("Equipment Values")]
     public EquipmentType equipmentType;
 
     public float damage;

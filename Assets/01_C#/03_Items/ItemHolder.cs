@@ -12,6 +12,8 @@ public class ItemHolder : MonoBehaviour
 
         if (item.prefab != null)
             Instantiate(item.prefab, this.transform);
+        else
+            Debug.Log("ItemPrefab missing: " + item.name);
         //GetComponent<MeshFilter>().mesh = item.mesh;
         //GetComponent<MeshRenderer>().material = item.material;
     }

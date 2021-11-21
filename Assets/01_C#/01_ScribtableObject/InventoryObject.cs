@@ -7,11 +7,9 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> inventorySlots = new List<InventorySlot>();
-    public event EventHandler<OnAddItemEventArgs> OnAddItem;
-    public class OnAddItemEventArgs : EventArgs
+    public event EventHandler<OnSlotCreateEventArgs> OnSlotCreate;
+    public class OnSlotCreateEventArgs : EventArgs
     {
-        public ItemObject item;
-        public int amount;
         public InventorySlot slot;
     }
     public void AddItem(ItemObject _item, int _amount)
@@ -27,7 +25,7 @@ public class InventoryObject : ScriptableObject
                 }
                 else
                 {
-                    Debug.Log("Cant carry more of this item");
+                    GameManager.acc.DM.DebugLog("Cant carry more of this item", DebugType.ITEMDEBUG);
                 }
                 hasItem = true;
                 break;
@@ -36,16 +34,23 @@ public class InventoryObject : ScriptableObject
 
         if (!hasItem)
         {
-            Debug.Log("Inv Add");
             InventorySlot newSlot = new InventorySlot(_item, _amount);
             inventorySlots.Add(newSlot);
-            OnAddItem?.Invoke(this, new OnAddItemEventArgs { item = _item, amount = _amount, slot = newSlot});
+            OnSlotCreate?.Invoke(this, new OnSlotCreateEventArgs { slot = newSlot });
         }
     }
 
-    public void RemoveItem()
+    public void RemoveItem(InventorySlot slot, int _amount)
     {
-
+        if(slot.amount - _amount <= 0)
+        {
+            inventorySlots.Remove(slot);
+            Destroy(slot.slotObj);
+        }
+        else
+        {
+            slot.amount -= _amount;
+        }
     }
 }
 

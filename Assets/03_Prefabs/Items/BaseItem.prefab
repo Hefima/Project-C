@@ -17,7 +17,7 @@ GameObject:
   m_Layer: 0
   m_Name: BaseItem
   m_TagString: Collectable
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f119ad93e788f41af9a0c1ef3b389e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: e520ab0f19712054ca1b91db6754fdd5, type: 2}
+  item: {fileID: 0}
 --- !u!54 &2636817338345652463
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,8 +10,11 @@ public abstract class ItemObject: ScriptableObject
 {
     public new string name;
     public ItemType type;
-    public GameObject prefab;
     public int maxCarryAmount;
+
+    [Header("GFX")]
+    public GameObject prefab;
+    public Sprite image;
 
     [HideInInspector] public EquipmentObject equipInfo = null;
     [HideInInspector] public RessourceObject ressourceInfo = null;

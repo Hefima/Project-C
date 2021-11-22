@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     public InputKeys IK;
     public UIManager UI;
-    public DebugManager DM;
     public EventManager EM;
 
     private void Awake()

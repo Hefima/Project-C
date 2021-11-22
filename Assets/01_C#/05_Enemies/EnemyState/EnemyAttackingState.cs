@@ -18,10 +18,10 @@ public class EnemyAttackingState : EnemyBaseState
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         attackPoint = enemy.attackpoint;
-        GameManager.acc.DM.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
+        DebugManager.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
 
         navMesh.speed = navMesh.speed * 2;
-
+        navMesh.speed = navMesh.speed * 2;
         nextAttack = Time.time;
     }
 

@@ -22,7 +22,7 @@ public class PlayerManager : MonoBehaviour
     {
         if(acc != null)
         {
-            Debug.LogWarning("More than one instance of PlayerManager found!");
+            DebugManager.DebugLog("More than one instance of PlayerManager found!", DebugType.DEFAULTDEBUG);
             return;
         }
         acc = this;
@@ -42,6 +42,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("U DIED");
+        DebugManager.DebugLog("U DIED", DebugType.PLAYERDEBUG);
     }
 }

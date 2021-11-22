@@ -25,7 +25,7 @@ public class InventoryObject : ScriptableObject
                 }
                 else
                 {
-                    GameManager.acc.DM.DebugLog("Cant carry more of this item", DebugType.ITEMDEBUG);
+                    DebugManager.DebugLog("Cant carry more of this item", DebugType.ITEMDEBUG);
                 }
                 hasItem = true;
                 break;

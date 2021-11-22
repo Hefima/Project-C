@@ -24,7 +24,7 @@ public class PlayerInventory : MonoBehaviour
             g.GetComponent<InventorySlotHolder>().image.enabled = true;
         }
         else
-            GameManager.acc.DM.DebugLog("Item image Missing: " + e.slot.item.name, DebugType.ITEMDEBUG);
+            DebugManager.DebugLog("Item image Missing: " + e.slot.item.name, DebugType.ITEMDEBUG);
     }
 
     public void OnApplicationQuit()

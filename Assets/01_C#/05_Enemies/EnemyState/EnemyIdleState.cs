@@ -8,7 +8,6 @@ public class EnemyIdleState : EnemyBaseState
     NavMeshAgent navMesh;
     GameObject enemyObj;
 
-    Transform startPos;
 
     public float moveRadius;
 
@@ -22,9 +21,11 @@ public class EnemyIdleState : EnemyBaseState
     {
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
-        startPos = enemyObj.transform;
+        enemy.startPos = enemyObj.transform;
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().enemyStats.moveSpeed;
+        navMesh.stoppingDistance = enemy.stopDis;
+
         DebugManager.DebugLogWarning(enemyObj.name + ": Idle State", DebugType.ENEMYDEBUG);
-        navMesh.speed = navMesh.speed / 2;
     }
 
     public override void UpdateState(EnemyStateManager enemy)
@@ -36,7 +37,7 @@ public class EnemyIdleState : EnemyBaseState
     {
         if (!moving && Time.time >= nextMoveTime)
         {
-            MoveEnemy();
+            MoveEnemy(enemy);
         }
         if (moving && navMesh.remainingDistance <= enemy.stopDis)
         {
@@ -50,17 +51,9 @@ public class EnemyIdleState : EnemyBaseState
             enemy.SwitchState(enemy.attackState);
     }
 
-    public override void OnTriggerEnter(EnemyStateManager enemy, Collider other)
-    {
-        /*if(other.tag == "Player")
-        {
-            enemy.SwitchState(enemy.attackState);
-        }*/
-    }
-
-    void MoveEnemy()
+    void MoveEnemy(EnemyStateManager enemy)
     {
         moving = true;
-        navMesh.SetDestination(HefiMath.RandomVector3_Plane(moveRadius, startPos.position));
+        navMesh.SetDestination(HefiMath.RandomVector3_Plane(moveRadius, enemy.startPos.position));
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, IBasicAttacks
 {
     public Transform attackPoint;
     public float attackRange;
@@ -14,6 +14,8 @@ public class PlayerCombat : MonoBehaviour
 
     public int basicAttack;
     public int combo;
+    int comboStep = 0;
+    int comboAttackSpeedGained;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
@@ -24,13 +26,7 @@ public class PlayerCombat : MonoBehaviour
         attackBuffer = Time.time;
     }
 
-    void Update()
-    {
-        if (GameManager.acc.IK.input_Mouse0)
-            BasicAttack();
-    }
-
-    void BasicAttack()
+    public void BasicAttack()
     {      
         if (Time.time >= attackBuffer)
         {
@@ -52,44 +48,48 @@ public class PlayerCombat : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, PlayerManager.acc.PM.cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            Collider[] enemiesHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
+            Collider[] damagableHit = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayer);
 
             if (basicAttack == 0)
             {
-                DamageEnemy(enemiesHit);
+                DamageEnemy(damagableHit);
                 basicAttack ++;
             }
             else if(basicAttack == 1)
             {
-                DamageEnemy(enemiesHit);
+                DamageEnemy(damagableHit);
                 basicAttack++;
             }
             else if(basicAttack == 2)
             {
-                DamageEnemy(enemiesHit);
+                DamageEnemy(damagableHit);
                 basicAttack = 0;
             }
         }
     }
 
-    void DamageEnemy(Collider[] enemies)
+    void DamageEnemy(Collider[] damagable)
     {
         bool hit = false;
-        for (int i = 0; i < enemies.Length; i++)
+        for (int i = 0; i < damagable.Length; i++)
         {
-            Debug.Log("YOU HIT: " + enemies[i].name + "With" + basicAttack);
-            enemies[i].GetComponent<EnemyManager>().TakeDamage(PlayerManager.acc.playerStats.attackDamage);
+            DebugManager.DebugLog("YOU HIT: " + damagable[i].name + "With" + basicAttack, DebugType.PLAYERDEBUG);
+            damagable[i].GetComponent<IDamagable>().TakeDamage(PlayerManager.acc.playerStats.attackDamage);
             hit = true;
         }
         if (hit)
             combo++;
         else
+        {
             combo = 0;
+            comboStep = 0;
+            PlayerManager.acc.playerStats.bonusAttackSpeed -= comboAttackSpeedGained;
+            comboAttackSpeedGained = 0;
+        }
     }
 
     void CalculateComboBonus()
     {
-        int comboStep = 0;
         bool newStep = false;
         if(combo == 10)
         {
@@ -110,6 +110,7 @@ public class PlayerCombat : MonoBehaviour
         if(newStep)
         {
             PlayerManager.acc.playerStats.bonusAttackSpeed += combo / comboStep;
+            comboAttackSpeedGained += combo / comboStep;
         }
     }
 

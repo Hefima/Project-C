@@ -45,12 +45,15 @@ public class PlayerMove : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    public void PlayerMoveUpdate()
+    {
+        GroundCheck();
+        Jump();
+    }
+    public void PlayerMoveFixedUpdate()
     {
         Gravity();
-        GroundCheck();
         Move();
-        Jump();
     }
 
     void Gravity()

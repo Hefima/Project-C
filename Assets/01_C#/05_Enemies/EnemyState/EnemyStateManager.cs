@@ -11,11 +11,12 @@ public class EnemyStateManager : MonoBehaviour
     [SerializeField]
     public EnemyIdleState idleState = new EnemyIdleState();
 
+
     //Enemy
+    public Transform startPos;
     public float sightRange;
     public LayerMask playerMask;
     public Transform attackpoint;
-
     public float stopDis;
 
     void Start()
@@ -33,11 +34,6 @@ public class EnemyStateManager : MonoBehaviour
     private void FixedUpdate()
     {
         currentState.FixedUpdateState(this);
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        currentState.OnTriggerEnter(this, other);
     }
 
     public void SwitchState(EnemyBaseState state)

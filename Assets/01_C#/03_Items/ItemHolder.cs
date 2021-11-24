@@ -8,7 +8,7 @@ public class ItemHolder : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.name = item.name;
+        gameObject.name = item.name;
 
         if (item.prefab != null)
             Instantiate(item.prefab, this.transform);

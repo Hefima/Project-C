@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour, IDamagable
 {
     [SerializeField]
     public EnemyStats enemyStats;
@@ -22,11 +22,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -34,7 +29,7 @@ public class EnemyManager : MonoBehaviour
             Die();
     }
 
-    public void Die()
+    void Die()
     {
         Destroy(this.gameObject);
     }

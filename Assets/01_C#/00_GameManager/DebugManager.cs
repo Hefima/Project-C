@@ -26,7 +26,7 @@ public class DebugManager : MonoBehaviour
     public List<DebugClass> DebugList = new List<DebugClass>();
 
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }

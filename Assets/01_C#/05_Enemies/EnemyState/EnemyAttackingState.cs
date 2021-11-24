@@ -18,11 +18,11 @@ public class EnemyAttackingState : EnemyBaseState
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         attackPoint = enemy.attackpoint;
-        DebugManager.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
 
-        navMesh.speed = navMesh.speed * 2;
-        navMesh.speed = navMesh.speed * 2;
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().enemyStats.moveSpeed * 2;
         nextAttack = Time.time;
+
+        DebugManager.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
     }
 
     public override void UpdateState(EnemyStateManager enemy)
@@ -35,11 +35,8 @@ public class EnemyAttackingState : EnemyBaseState
         {
             enemy.SwitchState(enemy.idleState);
         }
-    }
 
-    public override void FixedUpdateState(EnemyStateManager enemy)
-    {
-        Collider[] foundPlayer = Physics.OverlapSphere(enemyObj.transform.position, enemy.sightRange, enemy.playerMask);
+        Collider[] foundPlayer = Physics.OverlapSphere(enemyObj.transform.position, enemy.sightRange * 1.25f, enemy.playerMask);
 
         foreach (var player in foundPlayer)
         {
@@ -47,19 +44,15 @@ public class EnemyAttackingState : EnemyBaseState
             playerInRange = true;
         }
 
-        if (foundPlayer == null || foundPlayer.Length == 0)
+        if (foundPlayer.Length == 0)
         {
             playerInRange = false;
         }
     }
 
-    public override void OnTriggerEnter(EnemyStateManager enemy, Collider other)
+    public override void FixedUpdateState(EnemyStateManager enemy)
     {
-        if (other.tag == "Player")
-        {
-            Debug.Log("FoundPlayer");
-            MovePlayer(other.transform);
-        }
+
     }
 
     void MovePlayer(Transform player)
@@ -86,7 +79,7 @@ public class EnemyAttackingState : EnemyBaseState
             //}
             if (playerHit)
             {
-                Debug.Log("YOU HIT: Player");
+                DebugManager.DebugLog("YOU HIT: Player", DebugType.ENEMYDEBUG);
                 PlayerManager.acc.TakeDamage(enemyObj.GetComponent<EnemyManager>().enemyStats.attackDamage);
             }
         }

@@ -10,4 +10,9 @@ public class RessourceObject : ItemObject
         type = ItemType.Ressource;
         ressourceInfo = this;
     }
+
+    public override void Use()
+    {
+        DebugManager.DebugLog(name, DebugType.ITEMDEBUG);
+    }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct PlayerStats
 {
-    public int health;
+    public int maxHealth;
     public int attackDamage;
 
     public float baseAtkSpeed;

@@ -13,10 +13,10 @@ public class InventoryUI : MonoBehaviour
         switch (item.itemClass)
         {
             case Class.Weapon:
-                Equip(item);
+                EquipOld(item);
                 break;
             case Class.Armor:
-                Equip(item);
+                EquipOld(item);
                 break;
             case Class.Consumable:
                 break;
@@ -25,7 +25,15 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    void Equip(Item equipItem)
+
+    public void Equip()
+    {
+
+    }
+
+
+
+    void EquipOld(Item equipItem)
     {
         if(equipItem.itemClass == Class.Armor)
         {

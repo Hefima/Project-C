@@ -8,12 +8,17 @@ public class ItemHolder : MonoBehaviour
 
     private void Start()
     {
+        ItemInstantiate();
+    }
+
+    public void ItemInstantiate()
+    {
         gameObject.name = item.name;
 
         if (item.prefab != null)
             Instantiate(item.prefab, this.transform);
         else
-            Debug.Log("ItemPrefab missing: " + item.name);
+            DebugManager.DebugLog("ItemPrefab missing: " + item.name, DebugType.ITEMDEBUG);
         //GetComponent<MeshFilter>().mesh = item.mesh;
         //GetComponent<MeshRenderer>().material = item.material;
     }

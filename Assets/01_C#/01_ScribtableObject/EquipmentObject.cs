@@ -29,4 +29,9 @@ public class EquipmentObject : ItemObject
         type = ItemType.Equipment;
         equipInfo = this;
     }
+
+    public override void Use()
+    {
+        DebugManager.DebugLog(name, DebugType.ITEMDEBUG);
+    }
 }

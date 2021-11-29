@@ -12,10 +12,12 @@ public class UIManager : MonoBehaviour
         if (ui.activeInHierarchy)
         {
             ui.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {
             ui.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

@@ -5,16 +5,30 @@ using UnityEngine.UI;
 
 public class InventorySlotHolder : MonoBehaviour
 {
-    public InventorySlot info = new InventorySlot(null, 1);
+    public InventorySlot info;
 
     public Image image;
     public void OnInstantiate()
     {
-        info.slotObj = this.gameObject;
+        info.slotHolder = this;
+        GameManager.acc.UI.invUI.UpdateSlotUI(this);
     }
 
     public void UsePressed()
     {
-        info.item.Use();
+        info.item.Use(info);
+    }
+
+    public void AddItem(InventorySlot _slot)
+    {
+        info = _slot;
+        OnInstantiate();
+    }
+
+    public void ClearSlotHolder()
+    {
+        image.enabled = false;
+        image.sprite = null;
+        info = null;
     }
 }

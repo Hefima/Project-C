@@ -11,7 +11,7 @@ public class RessourceObject : ItemObject
         ressourceInfo = this;
     }
 
-    public override void Use()
+    public override void Use(InventorySlot _slot)
     {
         DebugManager.DebugLog(name, DebugType.ITEMDEBUG);
     }

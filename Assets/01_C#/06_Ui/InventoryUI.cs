@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public GameObject equipHead, equipTorso, equipBoots, equipHands, equipAmulete, equipRingLeft, equipRingRight, equipWeaponMain, equipWeaponSecc;
+    public InventorySlotHolder equipHead, equipTorso, equipBoots, equipHands, equipAmulete, equipRingLeft, equipRingRight, equipWeaponMain, equipWeaponSecc;
 
 
 
@@ -24,14 +24,6 @@ public class InventoryUI : MonoBehaviour
                 break;
         }
     }
-
-
-    public void Equip()
-    {
-
-    }
-
-
 
     void EquipOld(Item equipItem)
     {
@@ -104,4 +96,57 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void Equip(InventorySlot _slot)
+    {
+        switch (_slot.item.equipInfo.equipmentType)
+        {
+            case EquipmentType.OnHandWeapon:
+                break;
+            case EquipmentType.TwoHandWeapon:
+                break;
+            case EquipmentType.Amulete:
+                break;
+            case EquipmentType.Ring:
+                break;
+            case EquipmentType.ChestArmor:
+                EquipSlot(equipTorso, _slot);
+                break;
+            case EquipmentType.Gloves:
+                break;
+            case EquipmentType.Boots:
+                break;
+            default:
+                break;
+        }
+    }
+
+    void EquipSlot(InventorySlotHolder _equipSlotHolder, InventorySlot _slot)
+    {
+        InventorySlot oldSlot = _slot;
+        if (_slot.isEquiped)
+        {
+            _slot.isEquiped = false;
+            PlayerManager.acc.PInv.inventory.AddItem(_slot.item);
+            _equipSlotHolder.ClearSlotHolder();
+        }
+        else
+        {
+            PlayerManager.acc.PInv.inventory.RemoveItem(oldSlot);
+            _slot.isEquiped = true;
+            _equipSlotHolder.AddItem(_slot);
+            UpdateSlotUI(_equipSlotHolder);
+            //oldSlotHolder.ClearSlotHolder();
+        }
+    }
+    
+    public void UpdateSlotUI(InventorySlotHolder _slotHolder)
+    {
+        if (_slotHolder.info.item.image != null)
+        {
+            _slotHolder.image.sprite = _slotHolder.info.item.image;
+            _slotHolder.image.enabled = true;
+        }
+        else
+            DebugManager.DebugLog("Item image Missing: " + _slotHolder.info.item.name, DebugType.ITEMDEBUG);
+    }
 }

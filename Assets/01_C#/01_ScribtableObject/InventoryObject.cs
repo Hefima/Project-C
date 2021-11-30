@@ -12,7 +12,7 @@ public class InventoryObject : ScriptableObject
     {
         public InventorySlot slot;
     }
-    public void AddItem(ItemObject _item, int _amount)
+    public void AddItem(ItemObject _item, int _amount = 1)
     {
         bool hasItem = false;
         for (int i = 0; i < inventorySlots.Count; i++)
@@ -40,16 +40,16 @@ public class InventoryObject : ScriptableObject
         }
     }
 
-    public void RemoveItem(InventorySlot slot, int _amount)
+    public void RemoveItem(InventorySlot _slot, int _amount = 1)
     {
-        if(slot.amount - _amount <= 0)
+        if(_slot.amount - _amount <= 0)
         {
-            inventorySlots.Remove(slot);
-            Destroy(slot.slotObj);
+            inventorySlots.Remove(_slot);
+            Destroy(_slot.slotHolder.gameObject);
         }
         else
         {
-            slot.amount -= _amount;
+            _slot.amount -= _amount;
         }
     }
 }
@@ -58,9 +58,12 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class InventorySlot
 {
-    public GameObject slotObj;
+    public InventorySlotHolder slotHolder;
     public ItemObject item;
     public int amount;
+
+    public bool isEquiped;
+
     public InventorySlot(ItemObject _item, int _amount)
     {
         item = _item;
@@ -70,5 +73,15 @@ public class InventorySlot
     public void AddAmount(int _value)
     {
         amount += _value;
+    }
+
+    public void ClearSlot(bool clearSlotObj = false)
+    {
+        if (clearSlotObj)
+        {
+            slotHolder = null;
+        }
+        item = null;
+        amount = 0;
     }
 }

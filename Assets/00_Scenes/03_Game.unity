@@ -1027,11 +1027,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7601855595378868276, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   m_PrefabInstance: {fileID: 142966626}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &142966628 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601855595378868279, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
-  m_PrefabInstance: {fileID: 142966626}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171375852
 GameObject:
   m_ObjectHideFlags: 0
@@ -3513,7 +3508,7 @@ PrefabInstance:
     - target: {fileID: 2636817338345652498, guid: 9f367143078bf184084828b5351cd9e3, type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: e014952ec322d01489abec1116297c52, type: 2}
+      objectReference: {fileID: 11400000, guid: b331b5cf8dae82b498010c2e38e75748, type: 2}
     - target: {fileID: 2636817338345652499, guid: 9f367143078bf184084828b5351cd9e3, type: 3}
       propertyPath: m_Name
       value: BaseItem
@@ -4179,11 +4174,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7601855595378868276, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   m_PrefabInstance: {fileID: 934330796}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &934330798 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601855595378868279, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
-  m_PrefabInstance: {fileID: 934330796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &948819484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4784,14 +4774,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c561f598c09d6ad40b73329b4d0947d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equipHead: {fileID: 934330798}
-  equipTorso: {fileID: 1268485293}
-  equipBoots: {fileID: 2047924849}
+  equipHead: {fileID: 0}
+  equipTorso: {fileID: 1268485294}
+  equipBoots: {fileID: 0}
   equipHands: {fileID: 0}
   equipAmulete: {fileID: 0}
   equipRingLeft: {fileID: 0}
   equipRingRight: {fileID: 0}
-  equipWeaponMain: {fileID: 142966628}
+  equipWeaponMain: {fileID: 0}
   equipWeaponSecc: {fileID: 0}
 --- !u!1 &1133344840
 GameObject:
@@ -5678,11 +5668,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7601855595378868276, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   m_PrefabInstance: {fileID: 1268485291}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1268485293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601855595378868279, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
+--- !u!114 &1268485294 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8365145959101181673, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   m_PrefabInstance: {fileID: 1268485291}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50bb5d908384c7a45ab402234a597a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1306398324
 GameObject:
   m_ObjectHideFlags: 0
@@ -6722,6 +6718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 11400000, guid: b13eb928e1d619e45802ffb98cc556b2, type: 2}
+  equipedItems: []
   slotPrefab: {fileID: 7601855595378868279, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   parentTransform: {fileID: 1572651829}
 --- !u!1 &1389216050
@@ -8282,7 +8279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b161d9b256ebb443a20ffacb3c19de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryUI: {fileID: 1102991494}
+  invUI: {fileID: 1102991497}
+  inventoryUIObject: {fileID: 1102991494}
 --- !u!114 &1700422048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9548,11 +9546,6 @@ PrefabInstance:
 --- !u!224 &2047924848 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7601855595378868276, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
-  m_PrefabInstance: {fileID: 2047924847}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2047924849 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7601855595378868279, guid: eeba1d1c297ff61479f77cddeeee3076, type: 3}
   m_PrefabInstance: {fileID: 2047924847}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2076332968

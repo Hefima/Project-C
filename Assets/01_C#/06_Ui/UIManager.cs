@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject InventoryUI;
+    public InventoryUI invUI;
+
+    public GameObject inventoryUIObject;
 
 
     public void ToggleUI(GameObject ui)

@@ -28,7 +28,7 @@ public class InputKeys : MonoBehaviour
             switch (Input.inputString.ToUpper())
             {
                 case "I":
-                    GameManager.acc.UI.ToggleUI(GameManager.acc.UI.InventoryUI);
+                    GameManager.acc.UI.ToggleUI(GameManager.acc.UI.inventoryUIObject);
                     break;
             }
         }

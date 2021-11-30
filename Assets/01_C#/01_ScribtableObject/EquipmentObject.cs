@@ -23,15 +23,16 @@ public class EquipmentObject : ItemObject
     public int health;
     public int Agility;
     public float Mana;
-     
+
     private void Awake()
     {
         type = ItemType.Equipment;
         equipInfo = this;
     }
 
-    public override void Use()
+    public override void Use(InventorySlot _slot)
     {
-        DebugManager.DebugLog(name, DebugType.ITEMDEBUG);
+        DebugManager.DebugLog(_slot.item.name, DebugType.ITEMDEBUG);
+        GameManager.acc.UI.invUI.Equip(_slot);
     }
 }

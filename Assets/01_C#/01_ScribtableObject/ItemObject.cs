@@ -20,5 +20,5 @@ public abstract class ItemObject: ScriptableObject
     [HideInInspector] public RessourceObject ressourceInfo = null;
     [HideInInspector] public ConsumableObject consumableInfo = null;
 
-    public abstract void Use();
+    public abstract void Use(InventorySlot _slot);
 }

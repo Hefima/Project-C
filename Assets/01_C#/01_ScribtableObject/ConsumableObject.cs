@@ -17,9 +17,10 @@ public class ConsumableObject : ItemObject
         consumableInfo = this;
     }
 
-    public override void Use()
+    public override void Use(InventorySlot _slot)
     {
         DebugManager.DebugLog(name, DebugType.ITEMDEBUG);
         PlayerManager.acc.AddFood(restoreHealthValue, tickAmount, restoreTickTime);
+        PlayerManager.acc.PInv.inventory.RemoveItem(_slot, 1);
     }
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public InventoryObject inventory;
+    public List<ItemObject> equipedItems;
+
     public GameObject slotPrefab;
     public Transform parentTransform;
 
@@ -17,14 +19,7 @@ public class PlayerInventory : MonoBehaviour
     {
         GameObject g = Instantiate(slotPrefab, parentTransform);
         g.GetComponent<InventorySlotHolder>().info = e.slot;
-        g.GetComponent<InventorySlotHolder>().info.slotObj = g;
-        if (e.slot.item.image != null)
-        {
-            g.GetComponent<InventorySlotHolder>().image.sprite = e.slot.item.image;
-            g.GetComponent<InventorySlotHolder>().image.enabled = true;
-        }
-        else
-            DebugManager.DebugLog("Item image Missing: " + e.slot.item.name, DebugType.ITEMDEBUG);
+        g.GetComponent<InventorySlotHolder>().OnInstantiate();
     }
 
     public void OnApplicationQuit()

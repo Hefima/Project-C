@@ -4,26 +4,8 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public InventorySlotHolder equipHead, equipTorso, equipBoots, equipHands, equipAmulete, equipRingLeft, equipRingRight, equipWeaponMain, equipWeaponSecc;
+    public InventorySlotHolder equipTorso, equipBoots, equipGloves, equipAmulete, equipRingLeft, equipRingRight, equipWeaponMain, equipWeaponSecc;
 
-
-
-    public void Use(Item item)
-    {
-        switch (item.itemClass)
-        {
-            case Class.Weapon:
-                EquipOld(item);
-                break;
-            case Class.Armor:
-                EquipOld(item);
-                break;
-            case Class.Consumable:
-                break;
-            case Class.Item:
-                break;
-        }
-    }
 
     void EquipOld(Item equipItem)
     {
@@ -32,7 +14,7 @@ public class InventoryUI : MonoBehaviour
             switch (equipItem.armorPart)
             {
                 case ArmorPart.Head:
-                    equipHead.GetComponent<ItemSlot>().AddSlot(equipItem);
+                   // equipHead.GetComponent<ItemSlot>().AddSlot(equipItem);
                     break;
                 case ArmorPart.Torso:
                     equipTorso.GetComponent<ItemSlot>().AddSlot(equipItem);
@@ -59,7 +41,7 @@ public class InventoryUI : MonoBehaviour
                     equipBoots.GetComponent<ItemSlot>().AddSlot(equipItem);
                     break;
                 case ArmorPart.Hands:
-                    equipHands.GetComponent<ItemSlot>().AddSlot(equipItem);
+                    //equipHands.GetComponent<ItemSlot>().AddSlot(equipItem);
                     break;
             }
         }
@@ -100,13 +82,23 @@ public class InventoryUI : MonoBehaviour
     {
         switch (_slot.item.equipInfo.equipmentType)
         {
-            case EquipmentType.OnHandWeapon:
+            case EquipmentType.OneHandWeapon:
+                EquipWeapon(_slot);
                 break;
             case EquipmentType.TwoHandWeapon:
+                EquipWeapon(_slot);
                 break;
             case EquipmentType.Amulete:
                 break;
             case EquipmentType.Ring:
+                if(EquipMain(equipRingRight, equipRingLeft))
+                {
+                    EquipSlot(equipRingRight, _slot);
+                }
+                else
+                {
+                    EquipSlot(equipRingLeft, _slot);
+                }
                 break;
             case EquipmentType.ChestArmor:
                 EquipSlot(equipTorso, _slot);
@@ -114,6 +106,7 @@ public class InventoryUI : MonoBehaviour
             case EquipmentType.Gloves:
                 break;
             case EquipmentType.Boots:
+                EquipSlot(equipBoots, _slot);
                 break;
             default:
                 break;
@@ -134,11 +127,49 @@ public class InventoryUI : MonoBehaviour
             PlayerManager.acc.PInv.inventory.RemoveItem(oldSlot);
             _slot.isEquiped = true;
             _equipSlotHolder.AddItem(_slot);
-            UpdateSlotUI(_equipSlotHolder);
-            //oldSlotHolder.ClearSlotHolder();
         }
     }
-    
+
+    bool EquipMain(InventorySlotHolder _mainEquipSlotHolder, InventorySlotHolder _seccEquipSlotHolder)
+    {
+        if(_mainEquipSlotHolder.info == null)
+        {
+            return true;
+        }
+        else if(_seccEquipSlotHolder.info == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    void EquipWeapon(InventorySlot _slot)
+    {
+        if(_slot.item.equipInfo.equipmentType == EquipmentType.TwoHandWeapon)
+        {
+            EquipSlot(equipWeaponMain, _slot);
+
+            if(equipWeaponSecc.info.item != null)
+            {
+                PlayerManager.acc.PInv.inventory.AddItem(equipWeaponSecc.info.item);
+                equipWeaponSecc.ClearSlotHolder();
+            }
+        }
+        else if(_slot.item.equipInfo.equipmentType == EquipmentType.OneHandWeapon)
+        {
+            if (EquipMain(equipWeaponMain, equipWeaponSecc))
+            {
+                EquipSlot(equipWeaponMain, _slot);
+            }
+            else
+            {
+                EquipSlot(equipWeaponSecc, _slot);
+            }
+        }
+    }
     public void UpdateSlotUI(InventorySlotHolder _slotHolder)
     {
         if (_slotHolder.info.item.image != null)

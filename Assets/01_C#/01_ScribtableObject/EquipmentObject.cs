@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum EquipmentType
 {
-    OnHandWeapon,
+    OneHandWeapon,
     TwoHandWeapon,
     Amulete,
     Ring,

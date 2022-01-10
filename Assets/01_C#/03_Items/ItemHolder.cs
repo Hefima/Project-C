@@ -13,6 +13,7 @@ public class ItemHolder : MonoBehaviour
 
     public void ItemInstantiate()
     {
+
         gameObject.name = item.name;
 
         if (item.prefab != null)

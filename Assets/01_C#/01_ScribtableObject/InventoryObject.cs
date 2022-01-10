@@ -69,6 +69,15 @@ public class InventorySlot
         item = _item;
         amount = _amount;
     }
+    public InventorySlot(InventorySlot _slot)
+    {
+        slotHolder = _slot.slotHolder;
+
+        isEquiped = _slot.isEquiped;
+
+        item = _slot.item;
+        amount = _slot.amount;
+    }
 
     public void AddAmount(int _value)
     {

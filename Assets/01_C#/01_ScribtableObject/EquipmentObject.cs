@@ -32,7 +32,6 @@ public class EquipmentObject : ItemObject
 
     public override void Use(InventorySlot _slot)
     {
-        DebugManager.DebugLog(_slot.item.name, DebugType.ITEMDEBUG);
-        GameManager.acc.UI.invUI.Equip(_slot);
+        PlayerManager.acc.PInv.Equip(_slot);
     }
 }

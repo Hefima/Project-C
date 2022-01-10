@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class InventorySlotHolder : MonoBehaviour
 {
-    public InventorySlot info;
-
+    public InventorySlot info = null;
+    public bool hasItem = false;
     public Image image;
     public void OnInstantiate()
     {
@@ -21,12 +21,14 @@ public class InventorySlotHolder : MonoBehaviour
 
     public void AddItem(InventorySlot _slot)
     {
+        hasItem = true;
         info = _slot;
         OnInstantiate();
     }
 
     public void ClearSlotHolder()
     {
+        hasItem = false;
         image.enabled = false;
         image.sprite = null;
         info = null;

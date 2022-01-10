@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 960e61143a59bf9409d707649a2d6c09, type: 3}
-  m_Name: TestEquipment
+  m_Name: OneHanded
   m_EditorClassIdentifier: 
   name: Test Equipment
   type: 1
   maxCarryAmount: 1
   prefab: {fileID: 919132149155446097, guid: 1c08e12da51fdc0498fbb2c801f182fe, type: 3}
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 276b95d12d983254a89e0c2d7795cf3d, type: 3}
   equipInfo: {fileID: 11400000}
   ressourceInfo: {fileID: 0}
   consumableInfo: {fileID: 0}

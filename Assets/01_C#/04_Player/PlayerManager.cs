@@ -8,9 +8,9 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public static PlayerManager acc;
 
     //references
-    //public PlayerCombat PC;
     public PlayerMove PM;
     public PlayerInventory PInv;
+    public PlayerCombatController PC;
 
     //PlayerInfo
     [SerializeField]
@@ -42,6 +42,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
         if (GameManager.acc.IK.input_Mouse0)
             GetComponent<IBasicAttacks>().BasicAttack();
+
     }
 
     private void FixedUpdate()
@@ -67,7 +68,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        DebugManager.DebugLog("U DIED", DebugType.PLAYERDEBUG);
+        DebugManager.DebugLog("U DIED!", DebugType.PLAYERDEBUG);
     }
 
     public void AddFood(int _restoreHealthValue, int _tickAmount, float _restoreTickTime)

@@ -30,6 +30,8 @@ public class InputKeys : MonoBehaviour
                 case "I":
                     GameManager.acc.UI.ToggleUI(GameManager.acc.UI.inventoryUIObject);
                     break;
+                case "1":
+                    break;
             }
         }
 

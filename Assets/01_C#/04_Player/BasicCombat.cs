@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour, IBasicAttacks
+public class BasicCombat : MonoBehaviour, IBasicAttacks
 {
     public Transform attackPoint;
     public float attackRange;
     public float attackCD;
-     float attackBuffer;
+    float attackBuffer;
     public float attackDuration;
     float nextAttack;
     public LayerMask enemyLayer;

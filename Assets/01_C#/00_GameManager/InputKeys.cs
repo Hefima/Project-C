@@ -31,6 +31,16 @@ public class InputKeys : MonoBehaviour
                     GameManager.acc.UI.ToggleUI(GameManager.acc.UI.inventoryUIObject);
                     break;
                 case "1":
+                    PlayerManager.acc.PC.AbilityI();
+                    break;
+                case "2":
+                    PlayerManager.acc.PC.AbilityII();
+                    break;
+                case "3":
+                    PlayerManager.acc.PC.AbilityIII();
+                    break;
+                case "4":
+                    PlayerManager.acc.PC.Ultimate();
                     break;
             }
         }

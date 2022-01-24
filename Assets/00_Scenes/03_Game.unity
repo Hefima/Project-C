@@ -6000,7 +6000,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1258723133}
-  m_LocalRotation: {x: 0.6846976, y: -0.00000012540487, z: 0.00000011781175, w: 0.72882724}
+  m_LocalRotation: {x: 0.6846976, y: 0.00000012540471, z: -0.00000011781162, w: 0.72882724}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7226,6 +7226,7 @@ GameObject:
   - component: {fileID: 1381372785}
   - component: {fileID: 1381372786}
   - component: {fileID: 1381372784}
+  - component: {fileID: 1381372787}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -7407,7 +7408,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d24c4c421dffb45acb927d72084eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerClass: {fileID: 0}
+  playerClass: {fileID: 1381372787}
+--- !u!114 &1381372787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381372777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491f9244d388eca46b2ea36c81d6b5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1389216050
 GameObject:
   m_ObjectHideFlags: 0
@@ -9395,7 +9408,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745929298}
-  m_LocalRotation: {x: 0.67132735, y: 0.00000008071806, z: -0.00000007311265, w: 0.741161}
+  m_LocalRotation: {x: 0.67132735, y: -0.00000008071818, z: 0.00000007311275, w: 0.741161}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10294,7 +10307,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959373600}
-  m_LocalRotation: {x: 0.6846976, y: -0.00000012540688, z: 0.00000011781391, w: 0.72882724}
+  m_LocalRotation: {x: 0.6846976, y: 0.00000012540673, z: -0.00000011781377, w: 0.72882724}
   m_LocalPosition: {x: -4.8320155, y: 4.540229, z: 3.8536568}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

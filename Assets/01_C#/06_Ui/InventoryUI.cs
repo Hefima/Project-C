@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-
     public void UpdateSlotUI(InventorySlotHolder _slotHolder)
     {
         if (_slotHolder.info.item.image != null)

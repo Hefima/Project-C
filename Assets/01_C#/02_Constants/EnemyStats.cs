@@ -14,4 +14,6 @@ public struct EnemyStats
     public float moveSpeed;
 
     public float attackRange;
+
+    public int experience;
 }

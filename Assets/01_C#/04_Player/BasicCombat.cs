@@ -38,7 +38,7 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
         {
             CalculateComboBonus();
 
-            attackCD = 1 / (PlayerManager.acc.playerStats.baseAtkSpeed + (PlayerManager.acc.playerStats.attackSpeed + PlayerManager.acc.playerStats.bonusAttackSpeed) / 100);
+            attackCD = 1 / (PlayerManager.acc.basePlayerStats.baseAtkSpeed + (PlayerManager.acc.livePlayerStats.attackSpeed + PlayerManager.acc.livePlayerStats.bonusAttackSpeed) / 100);
 
             attackBuffer = Time.time + attackCD + attackDuration;
             nextAttack = Time.time + attackCD;
@@ -74,7 +74,7 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
         for (int i = 0; i < damagable.Length; i++)
         {
             DebugManager.DebugLog("YOU HIT: " + damagable[i].name + "With" + basicAttack, DebugType.PLAYERDEBUG);
-            damagable[i].GetComponent<IDamagable>().TakeDamage(PlayerManager.acc.playerStats.attackDamage);
+            damagable[i].GetComponent<IDamagable>().TakeDamage(PlayerManager.acc.livePlayerStats.attackDamage);
             hit = true;
         }
         if (hit)
@@ -83,7 +83,7 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
         {
             combo = 0;
             comboStep = 0;
-            PlayerManager.acc.playerStats.bonusAttackSpeed -= comboAttackSpeedGained;
+            PlayerManager.acc.livePlayerStats.bonusAttackSpeed -= comboAttackSpeedGained;
             comboAttackSpeedGained = 0;
         }
     }
@@ -109,7 +109,7 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
 
         if(newStep)
         {
-            PlayerManager.acc.playerStats.bonusAttackSpeed += combo / comboStep;
+            PlayerManager.acc.livePlayerStats.bonusAttackSpeed += combo / comboStep;
             comboAttackSpeedGained += combo / comboStep;
         }
     }

@@ -14,6 +14,11 @@ public class InventoryObject : ScriptableObject
     }
     public void AddItem(ItemObject _item, int _amount = 1)
     {
+        if(_amount > 1)
+            GameManager.acc.EM.AddEvent("You recived: " + _item.name + "[" + _amount + "]");
+        else
+            GameManager.acc.EM.AddEvent("You recived: " + _item.name);
+
         bool hasItem = false;
         for (int i = 0; i < inventorySlots.Count; i++)
         {

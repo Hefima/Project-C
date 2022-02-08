@@ -14,8 +14,15 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     //PlayerInfo
     [SerializeField]
-    public PlayerStats playerStats;
-    public int currentHealth;
+    public BasePlayerStats basePlayerStats;
+    [SerializeField]
+    public LivePlayerStats livePlayerStats;
+    public float currentHealth;
+    //Level
+    public int playerLevel;
+    public float playerExp;
+    public float playerExpMax = 100;
+    public float levelIncrease = 1.8f;
 
     //Others
     int ticks = 0;
@@ -33,7 +40,13 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     private void Start()
     {
-        currentHealth = playerStats.maxHealth;
+        GetLivePlayerStats();
+
+        currentHealth = basePlayerStats.maxHealth;
+        GameManager.acc.UI.UpdateHealthUI();
+        GameManager.acc.UI.UpdateExpUI();
+
+        GameManager.acc.EM.OnEnemyKilled += OnEnemyKilled;
     }
 
     private void Update()
@@ -50,20 +63,61 @@ public class PlayerManager : MonoBehaviour, IDamagable
         PM.PlayerMoveFixedUpdate();
     }
 
-    public void TakeDamage(int damage)
+    public void GetLivePlayerStats()
     {
-        currentHealth -= damage;
+        livePlayerStats.maxHealth = basePlayerStats.maxHealth + (basePlayerStats.maxHealth_PL * playerLevel) + PInv.GetEquipHealth();
+        livePlayerStats.attackDamage = basePlayerStats.attackDamage + (basePlayerStats.attackDamage_PL * playerLevel) + PInv.GetEquipDamage();
+        livePlayerStats.attackSpeed = basePlayerStats.attackSpeed + (basePlayerStats.attackSpeed_PL * playerLevel) + PInv.GetEquipAttackSpeed();
+        livePlayerStats.defense = basePlayerStats.defense + (basePlayerStats.defense_PL * playerLevel) + PInv.GetEquipDefence();
+        livePlayerStats.agility = basePlayerStats.agility + PInv.GetEquipAgility();
+
+        GameManager.acc.UI.UpdateHealthUI();
+        GameManager.acc.UI.statsUI.UpdateStatsUI();
+    }
+
+    public void GetExperience(float exp)
+    {
+        playerExp += exp;
+        if(playerExp >= playerExpMax)
+        {
+            LevelUp(playerExp - playerExpMax);
+        }
+
+        GameManager.acc.UI.UpdateExpUI();
+
+        GameManager.acc.EM.AddEvent("Experience: " + exp);
+    }
+
+    public void LevelUp(float expOverflow)
+    {
+        playerLevel++;
+        playerExp = expOverflow;
+
+        playerExpMax = playerExpMax * levelIncrease;
+
+        GameManager.acc.UI.UpdateExpUI();
+        GetLivePlayerStats();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        float actualDamage = damage / (1 + livePlayerStats.defense / 100);
+
+        currentHealth -= actualDamage;
+        GameManager.acc.UI.UpdateHealthUI();
+
         if (currentHealth <= 0)
             Die();
     }
 
-    public void GetHealth(int health)
+    public void GetHealth(float health)
     {
-        currentHealth += health;
-        if(currentHealth > playerStats.maxHealth)
+        currentHealth += health;       
+        if (currentHealth > basePlayerStats.maxHealth)
         {
-            currentHealth = playerStats.maxHealth;
+            currentHealth = basePlayerStats.maxHealth;
         }
+        GameManager.acc.UI.UpdateHealthUI();
     }
 
     private void Die()
@@ -94,5 +148,10 @@ public class PlayerManager : MonoBehaviour, IDamagable
             ticks = 0;
         }
         yield break;
+    }
+
+    public void OnEnemyKilled(object sender, EventManager.OnEnemyKilledEventArgs e)
+    {
+        GetExperience(e.experience);
     }
 }

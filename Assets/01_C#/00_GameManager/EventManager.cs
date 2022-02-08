@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,15 +18,15 @@ public class EventManager : MonoBehaviour
     public GameObject eventPrefab;
     public Transform eventParent;
 
-    int test;
-
-    private void Update()
+    public event EventHandler<OnEnemyKilledEventArgs> OnEnemyKilled;
+    public class OnEnemyKilledEventArgs : EventArgs
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            AddEvent("teseasfd" + test);
-            test++;
-        }
+        public int experience;
+    }
+
+    public void FireOnEnemyKilledEvent(object sender, OnEnemyKilledEventArgs onEnemyKilledEventArgs)
+    {
+        OnEnemyKilled?.Invoke(sender, onEnemyKilledEventArgs);
     }
 
     public void AddEvent(string _content)
@@ -84,14 +85,4 @@ public class EventManager : MonoBehaviour
 
         yield break;
     }
-
-    //void ClearActiveEvents()
-    //{
-    //    for (int i = 0; i < activeEvents.Count; i++)
-    //    {
-    //        activeEvents[i].SetActive(false);
-    //        waitingList.Add(activeEvents[i]);
-    //    }
-    //    activeEvents.Clear();
-    //}
 }

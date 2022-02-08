@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class EnemyManager : MonoBehaviour, IDamagable
     public EnemyStats enemyStats;
     NavMeshAgent navMesh;
 
-    public int currentHealth;
+    public float currentHealth;
 
     void Start()
     {
@@ -22,7 +23,7 @@ public class EnemyManager : MonoBehaviour, IDamagable
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -32,5 +33,8 @@ public class EnemyManager : MonoBehaviour, IDamagable
     void Die()
     {
         Destroy(this.gameObject);
+        GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = enemyStats.experience });
+
+        
     }
 }

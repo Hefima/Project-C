@@ -32,6 +32,57 @@ public class PlayerInventory : MonoBehaviour
         equipSlots.Add(equipWeaponSecc);
     }
 
+    public float GetEquipDamage()
+    {
+        float combinedDamage = 0;
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            if (equipSlots[i].hasItem)
+                combinedDamage += equipSlots[i].info.item.equipInfo.damage;
+        }
+        return combinedDamage;
+    }
+    public int GetEquipHealth()
+    {
+        int combinedHealth = 0;
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            if (equipSlots[i].hasItem)
+                combinedHealth += equipSlots[i].info.item.equipInfo.health;
+        }
+        return combinedHealth;
+    }
+    public float GetEquipDefence()
+    {
+        float combinedDefence = 0;
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            if (equipSlots[i].hasItem)
+                combinedDefence += equipSlots[i].info.item.equipInfo.defense;
+        }
+        return combinedDefence;
+    }
+    public float GetEquipAttackSpeed()
+    {
+        float combinedAttackSpeed = 0;
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            if (equipSlots[i].hasItem)
+                combinedAttackSpeed += equipSlots[i].info.item.equipInfo.attackSpeed;
+        }
+        return combinedAttackSpeed;
+    }
+    public float GetEquipAgility()
+    {
+        float combinedAgility = 0;
+        for (int i = 0; i < equipSlots.Count; i++)
+        {
+            if (equipSlots[i].hasItem)
+                combinedAgility += equipSlots[i].info.item.equipInfo.Agility;
+        }
+        return combinedAgility;
+    }
+
     public void OnSlotCreate(object sender, InventoryObject.OnSlotCreateEventArgs e)
     {
         GameObject g = Instantiate(slotPrefab, parentTransform);
@@ -55,6 +106,7 @@ public class PlayerInventory : MonoBehaviour
                 EquipWeapon(_slot);
                 break;
             case EquipmentType.Amulete:
+                EquipSlot(equipAmulete, _slot);
                 break;
             case EquipmentType.Ring:
                 if (EquipMain(equipRingRight, equipRingLeft))
@@ -70,6 +122,7 @@ public class PlayerInventory : MonoBehaviour
                 EquipSlot(equipTorso, _slot);
                 break;
             case EquipmentType.Gloves:
+                EquipSlot(equipGloves, _slot);
                 break;
             case EquipmentType.Boots:
                 EquipSlot(equipBoots, _slot);
@@ -77,6 +130,9 @@ public class PlayerInventory : MonoBehaviour
             default:
                 break;
         }
+
+        PlayerManager.acc.GetLivePlayerStats();
+        GameManager.acc.UI.UpdateHealthUI();
     }
 
     void EquipSlot(InventorySlotHolder _equipSlotHolder, InventorySlot _slot)

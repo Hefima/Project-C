@@ -93,14 +93,14 @@ public class PlayerMove : MonoBehaviour
             if (GameManager.acc.IK.input_Shift && isGrounded && moveAllowed)
             {
                 anim.SetBool("isRunning", true);
-                controller.Move(move * runSpeed * Time.deltaTime);
+                controller.Move(move * (PlayerManager.acc.livePlayerStats.agility * 2) * Time.deltaTime);
             }
             else if (moveAllowed)
             {
                 if (isGrounded)
                     anim.SetBool("isWalking", true);
 
-                controller.Move(move * walkSpeed * Time.deltaTime);
+                controller.Move(move * PlayerManager.acc.livePlayerStats.agility * Time.deltaTime);
             }
         }
         else

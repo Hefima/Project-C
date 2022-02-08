@@ -67,7 +67,7 @@ public class EnemyAttackingState : EnemyBaseState
             //Set Stats
             attackRange = enemyObj.GetComponent<EnemyManager>().enemyStats.attackRange;
 
-            attackCD = 1 / (PlayerManager.acc.playerStats.baseAtkSpeed + enemyObj.GetComponent<EnemyManager>().enemyStats.attackSpeed / 100);
+            attackCD = 1 / (PlayerManager.acc.basePlayerStats.baseAtkSpeed + enemyObj.GetComponent<EnemyManager>().enemyStats.attackSpeed / 100);
             nextAttack = Time.time + attackCD;
 
             bool playerHit = Physics.CheckSphere(attackPoint.position, attackRange, enemyObj.GetComponent<EnemyStateManager>().playerMask);

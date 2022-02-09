@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public EventManager EM;
     public ItemManager IM;
 
+    public GameObject Quests;
+
     private void Awake()
     {
         acc = this;

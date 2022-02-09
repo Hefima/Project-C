@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public PlayerMove PM;
     public PlayerInventory PInv;
     public PlayerCombatController PC;
+    public PlayerAnimations PA;
 
     //PlayerInfo
     [SerializeField]
@@ -23,7 +24,8 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public float playerExp;
     public float playerExpMax = 100;
     public float levelIncrease = 1.8f;
-
+    //Quests
+    public GameObject avtiveQuests;
     //Others
     int ticks = 0;
     bool eating;

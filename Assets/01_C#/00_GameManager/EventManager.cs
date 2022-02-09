@@ -21,6 +21,7 @@ public class EventManager : MonoBehaviour
     public event EventHandler<OnEnemyKilledEventArgs> OnEnemyKilled;
     public class OnEnemyKilledEventArgs : EventArgs
     {
+        public int enemyID;
         public int experience;
     }
 

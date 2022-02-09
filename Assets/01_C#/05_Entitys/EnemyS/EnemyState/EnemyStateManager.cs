@@ -19,6 +19,9 @@ public class EnemyStateManager : MonoBehaviour
     public Transform attackpoint;
     public float stopDis;
 
+    //HealthBar
+    public Transform healthBarCanvas;
+
     void Start()
     {
         currentState = idleState;
@@ -29,6 +32,7 @@ public class EnemyStateManager : MonoBehaviour
     void Update()
     {
         currentState.UpdateState(this);
+        HealthLookAtCam();
     }
 
     private void FixedUpdate()
@@ -40,5 +44,11 @@ public class EnemyStateManager : MonoBehaviour
     {
         currentState = state;
         state.EnterState(this);
+    }
+
+    void HealthLookAtCam()
+    {
+        healthBarCanvas.LookAt(Camera.main.transform);
+        healthBarCanvas.Rotate(0, 180, 0);
     }
 }

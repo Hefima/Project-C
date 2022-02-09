@@ -52,29 +52,32 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
 
             if (basicAttack == 0)
             {
-                DamageEnemy(damagableHit);
+                DamageEnemy(damagableHit, PlayerManager.acc.livePlayerStats.attackDamage);
                 basicAttack ++;
+                StartCoroutine(PlayerManager.acc.PA.Punsh("punsh_1"));
             }
             else if(basicAttack == 1)
             {
-                DamageEnemy(damagableHit);
+                DamageEnemy(damagableHit, PlayerManager.acc.livePlayerStats.attackDamage);
                 basicAttack++;
+                StartCoroutine(PlayerManager.acc.PA.Punsh("punsh_1"));
             }
             else if(basicAttack == 2)
             {
-                DamageEnemy(damagableHit);
+                DamageEnemy(damagableHit, PlayerManager.acc.livePlayerStats.attackDamage * 1.5f);
                 basicAttack = 0;
+                StartCoroutine(PlayerManager.acc.PA.Punsh("punsh_2"));
             }
         }
     }
 
-    void DamageEnemy(Collider[] damagable)
+    void DamageEnemy(Collider[] damagable, float damage)
     {
         bool hit = false;
         for (int i = 0; i < damagable.Length; i++)
         {
             DebugManager.DebugLog("YOU HIT: " + damagable[i].name + "With" + basicAttack, DebugType.PLAYERDEBUG);
-            damagable[i].GetComponent<IDamagable>().TakeDamage(PlayerManager.acc.livePlayerStats.attackDamage);
+            damagable[i].GetComponent<IDamagable>().TakeDamage(damage);
             hit = true;
         }
         if (hit)

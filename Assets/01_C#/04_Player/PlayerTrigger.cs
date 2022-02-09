@@ -16,11 +16,10 @@ public class PlayerTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        var item = other.GetComponent<ItemHolder>();
-        if (item && GameManager.acc.IK.input_E)
+        var interactable = other.tag == "Interactable";
+        if (interactable && GameManager.acc.IK.input_E)
         {
-            PlayerManager.acc.PInv.inventory.AddItem(item.item, 1);
-            Destroy(other.gameObject);
+            other.GetComponent<IInteractable>().Interact();
         }
     }
 }

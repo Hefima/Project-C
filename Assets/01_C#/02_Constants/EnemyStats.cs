@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public struct EnemyStats
 {
+    public int ID;
+
     public int health;
     public int attackDamage;
 

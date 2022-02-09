@@ -22,7 +22,7 @@ MonoBehaviour:
   consumableInfo: {fileID: 0}
   equipmentType: 6
   damage: 0
-  attackSpeed: 20
+  attackSpeed: 200
   defense: 5
   health: 10
   Agility: 3

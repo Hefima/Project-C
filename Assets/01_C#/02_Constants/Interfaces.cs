@@ -16,3 +16,8 @@ public interface IUsable
 {
     void Use();
 }
+
+public interface IInteractable
+{
+    void Interact();
+}

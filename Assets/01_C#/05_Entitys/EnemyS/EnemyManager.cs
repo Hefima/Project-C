@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyManager : MonoBehaviour, IDamagable
 {
@@ -11,6 +12,8 @@ public class EnemyManager : MonoBehaviour, IDamagable
     NavMeshAgent navMesh;
 
     public float currentHealth;
+
+    public Slider healthSlider;
 
     void Start()
     {
@@ -21,6 +24,7 @@ public class EnemyManager : MonoBehaviour, IDamagable
         {
             navMesh.speed = enemyStats.moveSpeed;
         }
+        UpdateHealthUI();
     }
 
     public void TakeDamage(float damage)
@@ -28,13 +32,18 @@ public class EnemyManager : MonoBehaviour, IDamagable
         currentHealth -= damage;
         if (currentHealth <= 0)
             Die();
+        UpdateHealthUI();
     }
 
     void Die()
     {
         Destroy(this.gameObject);
-        GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = enemyStats.experience });
+        GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = enemyStats.experience, enemyID = enemyStats.ID });        
+    }
 
-        
+    void UpdateHealthUI()
+    {
+        healthSlider.maxValue = enemyStats.health;
+        healthSlider.value = currentHealth;
     }
 }

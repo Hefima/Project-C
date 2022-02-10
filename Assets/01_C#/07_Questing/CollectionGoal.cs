@@ -16,11 +16,11 @@ public class CollectionGoal : QuestGoal
         requiredAmount = _requiredAmount;
     }
 
-    public override void Init()
+    public override IEnumerator Init()
     {
-        base.Init();
         GameManager.acc.EM.OnItemPickedUp += ItemPickedUp;
         CheckPlayerInv();
+        yield return null;
     }
 
     void ItemPickedUp(object sender, EventManager.OnItemPickedUpEventArgs e)

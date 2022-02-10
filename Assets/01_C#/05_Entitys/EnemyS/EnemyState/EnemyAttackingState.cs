@@ -19,7 +19,6 @@ public class EnemyAttackingState : EnemyBaseState
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         attackPoint = enemy.attackpoint;
 
-        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility * 2;
         nextAttack = Time.time;
 
         DebugManager.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
@@ -27,6 +26,8 @@ public class EnemyAttackingState : EnemyBaseState
 
     public override void UpdateState(EnemyStateManager enemy)
     {
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility * 2;
+
         if (navMesh.remainingDistance <= enemy.stopDis && playerInRange)
         {
             AttackPlayer();

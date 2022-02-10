@@ -10,9 +10,10 @@ public class QuestGoal
     public int currentAmount;
     public int requiredAmount;
 
-    public virtual void Init()
+    public virtual IEnumerator Init()
     {
         //default
+        yield return null;
     }
 
 
@@ -22,6 +23,8 @@ public class QuestGoal
         {
             Complete();
         }
+
+        GameManager.acc.UI.questUI.UpdateQuestUI(quest.questPrefab, quest);
     }
 
     public void Complete()

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InventorySlotHolder : MonoBehaviour
 {
+    public ToolTipTrigger toolTipTrigger;
+
     public InventorySlot info = null;
     public bool hasItem = false;
     public bool isEquipSlot = false;
@@ -18,11 +20,64 @@ public class InventorySlotHolder : MonoBehaviour
         GameManager.acc.UI.invUI.UpdateSlotUI(this);
         if(!isEquipSlot)
             removeButton.onClick.AddListener(OnRemoveButtonClick);
+
+        SetToolTip();
+    }
+
+    void SetToolTip()
+    {
+        if (info.item != null)
+        {
+            toolTipTrigger.header = info.item.name;
+            switch (info.item.type)
+            {
+                case ItemType.Default:
+                    break;
+                case ItemType.Equipment:
+                    toolTipTrigger.content = "\n" +
+                        info.item.equipInfo.equipmentType.ToString() + "\n" +
+                        "\n" +
+                        "Health : " + info.item.equipInfo.health + "\n" +
+                        "Damage : " + info.item.equipInfo.damage + "\n" +
+                        "Atk Speed : " + info.item.equipInfo.attackSpeed + "\n" +
+                        "Defense :  " + info.item.equipInfo.defense + "\n" +
+                        "Agility : " + info.item.equipInfo.Agility + "\n";
+                    break;
+                case ItemType.Consumable:
+                    float timeToRestore = info.item.consumableInfo.restoreTickTime * info.item.consumableInfo.tickAmount;
+
+                    toolTipTrigger.content = "\n" +
+                        info.item.type.ToString() + "\n" +
+                        "Health restored : " + info.item.consumableInfo.restoreHealthValue + "\n" +
+                        "Time to restore : " + timeToRestore.ToString("0.0") + "secc";
+
+                    break;
+                case ItemType.Ressource:
+                    toolTipTrigger.content = "\n" +
+                        info.item.type.ToString() + "\n" +
+                        info.item.ressourceInfo.ressourceDescription;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            toolTipTrigger.header = "";
+            toolTipTrigger.content = "";
+        }
+
+    }
+
+    void ChangeToolTipContent()
+    {
+
     }
 
     public void UsePressed()
     {
-        info.item.Use(info);
+        if(info.item != null)
+            info.item.Use(info);
     }
 
     public void AddItem(InventorySlot _slot)

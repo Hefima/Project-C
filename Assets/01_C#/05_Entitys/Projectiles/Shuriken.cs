@@ -25,7 +25,7 @@ public class Shuriken : MonoBehaviour
     {
         var hit = other.GetComponent<IDamagable>();
 
-        if (hit != null)
+        if (hit != null && other.tag != "Player")
         {
             hit.TakeDamage(damage);
         }

@@ -12,6 +12,7 @@ public class EnemyManager : MonoBehaviour, IDamagable
     public BaseStats baseStats
     {
         get { return enemyBaseStats; }
+        set { enemyBaseStats = value; }
     }
     public int experience;
 
@@ -48,8 +49,10 @@ public class EnemyManager : MonoBehaviour, IDamagable
 
     void Die()
     {
-        Destroy(this.gameObject);
+        GameManager.acc.IM.DropItem(transform, GameManager.acc.IM.RandomItem());
+
         GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = this.experience, enemyID = baseStats.ID });        
+        Destroy(this.gameObject);
     }
 
     void UpdateHealthUI()

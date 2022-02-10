@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    BaseStats baseStats { get;}
+    BaseStats baseStats { get; set; }
     float currentHealth { get;}
 
     void TakeDamage(float damage);

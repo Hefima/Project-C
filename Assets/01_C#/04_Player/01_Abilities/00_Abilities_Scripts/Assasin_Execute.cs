@@ -36,20 +36,32 @@ public class Assasin_Execute : Ability
 
             damagable.TakeDamage(PlayerManager.acc.livePlayerStats.attackDamage * damageMultiplier);
 
+            float agility = damagable.baseStats.agility;
+
+            damagable.baseStats = new BaseStats(damagable.baseStats.ID, damagable.baseStats.maxHealth, damagable.baseStats.maxHealth_PL,
+                damagable.baseStats.attackDamage, damagable.baseStats.attackDamage_PL, damagable.baseStats.baseAtkSpeed, damagable.baseStats.attackSpeed,
+                damagable.baseStats.attackSpeed_PL, damagable.baseStats.defense, damagable.baseStats.defense_PL, 0f);
+
+
             yield return new WaitForSeconds(executeDelay);
+
+            damagable.baseStats = new BaseStats(damagable.baseStats.ID, damagable.baseStats.maxHealth, damagable.baseStats.maxHealth_PL,
+                damagable.baseStats.attackDamage, damagable.baseStats.attackDamage_PL, damagable.baseStats.baseAtkSpeed, damagable.baseStats.attackSpeed,
+                damagable.baseStats.attackSpeed_PL, damagable.baseStats.defense, damagable.baseStats.defense_PL, agility);
 
             Destroy(g);
             PlayerManager.acc.PM.moveAllowed = true;
 
+
             if (enemyHit.transform != null)
             {
-                Transform enemyTransform = enemyHit.transform;
+                Vector3 enemyPos = enemyHit.transform.position;
 
                 if (damagable.currentHealth <= damagable.baseStats.maxHealth * executeThreshhold)
                 {
                     damagable.TakeDamage(damagable.baseStats.maxHealth);
                     //teleport to him
-                    PlayerManager.acc.transform.position = enemyTransform.position;
+                    PlayerManager.acc.TeleportPlayer(enemyPos);
                 }
             }
         }

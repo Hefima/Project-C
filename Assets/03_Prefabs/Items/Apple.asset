@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7d41dc9dfdb3c46ae036228636df81, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 200
   name: Apple
   type: 2
   rarity: 0
   maxCarryAmount: 50
-  prefab: {fileID: 919132149155446097, guid: 1c08e12da51fdc0498fbb2c801f182fe, type: 3}
-  image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  prefab: {fileID: 919132149155446097, guid: 0eff9d29d5cfc8e45bf3a7e68226f5d9, type: 3}
+  image: {fileID: 21300000, guid: efd7777b57317ad4989fbc5d45f19dae, type: 3}
   equipInfo: {fileID: 0}
   ressourceInfo: {fileID: 0}
   consumableInfo: {fileID: 11400000}
-  restoreHealthValue: 20
-  restoreTickTime: 5
-  tickAmount: 4
+  restoreHealthValue: 50
+  restoreTickTime: 1
+  tickAmount: 5

@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     public UIManager UI;
     public EventManager EM;
     public ItemManager IM;
-
-    public GameObject Quests;
+    public SceneHandler SH;
 
     private void Awake()
     {
         acc = this;
+    }
+
+    private void Update()
+    {
+        UI.toolTip.FollowMouse();
     }
 }

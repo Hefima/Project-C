@@ -21,7 +21,7 @@ public class InputKeys : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
+            GameManager.acc.UI.TogglePause();
         }
 
         if (Input.anyKeyDown)
@@ -33,6 +33,9 @@ public class InputKeys : MonoBehaviour
                     break;
                 case "P":
                     GameManager.acc.UI.ToggleUI(GameManager.acc.UI.statsUIObject);
+                    break;
+                case "O":
+                    GameManager.acc.UI.ToggleUI(GameManager.acc.UI.questUIObject);
                     break;
                 case "1":
                     PlayerManager.acc.PC.AbilityI();

@@ -18,6 +18,19 @@ public class PlayerInventory : MonoBehaviour
     {
         GameManager.acc.EM.OnSlotCreate += OnSlotCreate;
         AddEquipSlots();
+
+        LoadSavedItems();
+    }
+
+    public void LoadSavedItems()
+    {
+        if(inventory.inventorySlots.Count > 0)
+        {
+            for (int i = 0; i < inventory.inventorySlots.Count; i++)
+            {
+                inventory.CreateSlot(inventory.inventorySlots[i]);
+            }
+        }
     }
 
     void AddEquipSlots()

@@ -66,8 +66,18 @@ public class ItemManager : MonoBehaviour
         return null;
     }
 
-    public void DropItem(Transform transform, ItemObject item)
+    public void DropItem(Transform position, ItemObject item)
     {
-        GameObject g = Instantiate(itemPrefab, transform.position, transform.rotation);
+        GameObject g = Instantiate(itemPrefab, position.position, position.rotation);
+
+        g.GetComponent<ItemHolder>().item = item;
+    }
+    public void DropItemParent(Transform position,Transform parent , ItemObject item)
+    {
+        GameObject g = Instantiate(itemPrefab, position.position, position.rotation, parent.parent);
+
+        g.transform.parent = parent;
+
+        g.GetComponent<ItemHolder>().item = item;
     }
 }

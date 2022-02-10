@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public BaseStats baseStats
     {
         get { return playerBaseStats; }
+        set { playerBaseStats = value; }
     }
 
     [SerializeField]
@@ -132,11 +133,28 @@ public class PlayerManager : MonoBehaviour, IDamagable
         GameManager.acc.UI.UpdateHealthUI();
     }
 
+    public void TeleportPlayer(Vector3 position)
+    {
+        PM.controller.enabled = false;
+        transform.position = position;
+        PM.controller.enabled = true;
+    }
+
     private void Die()
     {
         DebugManager.DebugLog("U DIED!", DebugType.PLAYERDEBUG);
+        StartCoroutine(DeathScreen());
     }
 
+    IEnumerator DeathScreen()
+    {
+        GameManager.acc.UI.ToggleUI(GameManager.acc.UI.gameOver);
+        Time.timeScale = 0;
+        PlayerManager.acc.PInv.inventory.inventorySlots.Clear();
+        yield return new WaitForSecondsRealtime(3);
+        GameManager.acc.SH.LoadScene(2);
+        yield return null;
+    }
     public bool AddFood(int _restoreHealthValue, int _tickAmount, float _restoreTickTime)
     {
         if (!eating)

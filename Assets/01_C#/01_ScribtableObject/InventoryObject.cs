@@ -42,12 +42,18 @@ public class InventoryObject : ScriptableObject
         }
     }
 
+    public void CreateSlot(InventorySlot _slot)
+    {
+        GameManager.acc.EM.FireOnSlotCreateEvent(this, new EventManager.OnSlotCreateEventArgs { slot = _slot });
+    }
+
     public void RemoveItem(InventorySlot _slot, int _amount = 1)
     {
         if(_slot.amount - _amount <= 0)
         {
             inventorySlots.Remove(_slot);
             Destroy(_slot.slotHolder.gameObject);
+            GameManager.acc.UI.toolTip.Hide();
         }
         else
         {

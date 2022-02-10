@@ -22,7 +22,6 @@ public class EnemyIdleState : EnemyBaseState
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         enemy.startPos = enemyObj.transform;
-        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility;
         navMesh.stoppingDistance = enemy.stopDis;
 
         DebugManager.DebugLogWarning(enemyObj.name + ": Idle State", DebugType.ENEMYDEBUG);
@@ -35,6 +34,8 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void FixedUpdateState(EnemyStateManager enemy)
     {
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility;
+
         if (!moving && Time.time >= nextMoveTime)
         {
             MoveEnemy(enemy);

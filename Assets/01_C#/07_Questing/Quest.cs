@@ -5,6 +5,8 @@ using System.Linq;
 
 public class Quest : MonoBehaviour
 {
+    public QuestPrefab questPrefab;
+
     [SerializeField]
     public List<QuestGoal> goals = new List<QuestGoal>();
     public string questName;
@@ -13,6 +15,15 @@ public class Quest : MonoBehaviour
     public int experienceReward;
     public List<ItemObject> itemRewards = new List<ItemObject>();
     public bool completed;
+
+    public IEnumerator InitGoals()
+    {
+        yield return StartCoroutine(GameManager.acc.UI.questUI.CreateQuestUI(this));
+        for (int i = 0; i < goals.Count; i++)
+        {
+             yield return StartCoroutine(goals[i].Init());
+        }
+    }
 
     public void CheckGoals()
     {

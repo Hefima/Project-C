@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960e61143a59bf9409d707649a2d6c09, type: 3}
   m_Name: Fine Iron Axe
   m_EditorClassIdentifier: 
-  ID: 0
+  ID: 111
   name: Fine Iron Axe
   type: 1
   rarity: 1

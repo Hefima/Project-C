@@ -6,9 +6,15 @@ public class UIManager : MonoBehaviour
 {
     public InventoryUI invUI;
     public StatsUI statsUI;
+    public QuestUI questUI;
+    public ToolTipSystem toolTip;
 
     public GameObject inventoryUIObject;
     public GameObject statsUIObject;
+    public GameObject questUIObject;
+    public GameObject pauseUIObject;
+
+    public GameObject gameOver;
 
     //HealthBar
     public Slider healthSlider;
@@ -31,6 +37,7 @@ public class UIManager : MonoBehaviour
         {
             ui.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            GameManager.acc.UI.toolTip.Hide();
         }
         else
         {
@@ -92,5 +99,21 @@ public class UIManager : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    public void TogglePause()
+    {
+        if (pauseUIObject.activeInHierarchy)
+        {
+            pauseUIObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1;
+        }
+        else
+        {
+            pauseUIObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+        }
     }
 }

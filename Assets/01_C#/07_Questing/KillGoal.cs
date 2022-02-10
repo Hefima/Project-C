@@ -16,10 +16,10 @@ public class KillGoal : QuestGoal
         requiredAmount = _requiredAmount;
     }
 
-    public override void Init()
+    public override IEnumerator Init()
     {
-        base.Init();
         GameManager.acc.EM.OnEnemyKilled += EnemyDied;
+        yield return null;
     }
 
     void EnemyDied(object sender, EventManager.OnEnemyKilledEventArgs e)

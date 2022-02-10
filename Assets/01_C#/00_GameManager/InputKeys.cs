@@ -12,6 +12,7 @@ public class InputKeys : MonoBehaviour
     public bool input_Shift;
     public bool input_Space;
     public bool input_E;
+    public bool input_CTRL;
 
     void Update()
     {
@@ -55,5 +56,7 @@ public class InputKeys : MonoBehaviour
 
         input_Mouse0 = Input.GetMouseButton(0);
         input_Mouse1 = Input.GetMouseButton(1);
+
+        input_CTRL = Input.GetKey(KeyCode.LeftControl);
     }
 }

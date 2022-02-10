@@ -24,10 +24,30 @@ public class EventManager : MonoBehaviour
         public int enemyID;
         public int experience;
     }
-
-    public void FireOnEnemyKilledEvent(object sender, OnEnemyKilledEventArgs onEnemyKilledEventArgs)
+    public event EventHandler<OnItemPickedUpEventArgs> OnItemPickedUp;
+    public class OnItemPickedUpEventArgs : EventArgs
     {
-        OnEnemyKilled?.Invoke(sender, onEnemyKilledEventArgs);
+        public ItemObject item;
+    }
+    public event EventHandler<OnSlotCreateEventArgs> OnSlotCreate;
+    public class OnSlotCreateEventArgs : EventArgs
+    {
+        public InventorySlot slot;
+    }
+
+    public void FireOnEnemyKilledEvent(object _sender, OnEnemyKilledEventArgs _onEnemyKilledEventArgs)
+    {
+        OnEnemyKilled?.Invoke(_sender, _onEnemyKilledEventArgs);
+    }
+
+    public void FireOnItemPickedUpEvent(object _sender, OnItemPickedUpEventArgs _onItemPickedUpEventArgs)
+    {
+        OnItemPickedUp?.Invoke(_sender, _onItemPickedUpEventArgs);
+    }
+
+    public void FireOnSlotCreateEvent(object _sender, OnSlotCreateEventArgs _onSlotCreateEventArgs)
+    {
+        OnSlotCreate?.Invoke(_sender, _onSlotCreateEventArgs);
     }
 
     public void AddEvent(string _content)

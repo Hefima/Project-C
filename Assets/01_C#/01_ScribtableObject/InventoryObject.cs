@@ -7,11 +7,6 @@ using UnityEngine;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> inventorySlots = new List<InventorySlot>();
-    public event EventHandler<OnSlotCreateEventArgs> OnSlotCreate;
-    public class OnSlotCreateEventArgs : EventArgs
-    {
-        public InventorySlot slot;
-    }
     public void AddItem(ItemObject _item, int _amount = 1)
     {
         if(_amount > 1)
@@ -27,6 +22,7 @@ public class InventoryObject : ScriptableObject
                 if(inventorySlots[i].amount + _amount <= _item.maxCarryAmount)
                 {
                     inventorySlots[i].AddAmount(_amount);
+                    GameManager.acc.EM.FireOnItemPickedUpEvent(this, new EventManager.OnItemPickedUpEventArgs { item = _item });
                 }
                 else
                 {
@@ -41,7 +37,8 @@ public class InventoryObject : ScriptableObject
         {
             InventorySlot newSlot = new InventorySlot(_item, _amount);
             inventorySlots.Add(newSlot);
-            OnSlotCreate?.Invoke(this, new OnSlotCreateEventArgs { slot = newSlot });
+            GameManager.acc.EM.FireOnSlotCreateEvent(this, new EventManager.OnSlotCreateEventArgs { slot = newSlot });
+            GameManager.acc.EM.FireOnItemPickedUpEvent(this, new EventManager.OnItemPickedUpEventArgs { item = _item });
         }
     }
 
@@ -55,7 +52,54 @@ public class InventoryObject : ScriptableObject
         else
         {
             _slot.amount -= _amount;
+            GameManager.acc.UI.invUI.UpdateSlotUI(_slot.slotHolder);
         }
+    }
+
+    public (bool hasItem, int amount) SearchItem(ItemObject _item)
+    {
+        bool hasItem = false;
+        int amount = 0;
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if(inventorySlots[i].item.ID == _item.ID)
+            {
+                hasItem = true;
+                amount += inventorySlots[i].amount;
+            }
+        }
+
+        return (hasItem, amount);
+    }
+    public (bool hasItem, int amount) SearchItem(int _itemID)
+    {
+        bool hasItem = false;
+        int amount = 0;
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if(inventorySlots[i].item.ID == _itemID)
+            {
+                hasItem = true;
+                amount += inventorySlots[i].amount;
+            }
+        }
+
+        return (hasItem, amount);
+    }
+    public (bool hasItem, int amount) SearchItem(string _itemName)
+    {
+        bool hasItem = false;
+        int amount = 0;
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            if(inventorySlots[i].item.name == _itemName)
+            {
+                hasItem = true;
+                amount += inventorySlots[i].amount;
+            }
+        }
+
+        return (hasItem, amount);
     }
 }
 
@@ -87,6 +131,7 @@ public class InventorySlot
     public void AddAmount(int _value)
     {
         amount += _value;
+        GameManager.acc.UI.invUI.UpdateSlotUI(slotHolder);
     }
 
     public void ClearSlot(bool clearSlotObj = false)

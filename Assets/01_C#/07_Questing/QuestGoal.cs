@@ -28,6 +28,6 @@ public class QuestGoal
     {
         goalCompleted = true;
         quest.CheckGoals();
-        Debug.Log("Goal marked as completed");
+        GameManager.acc.EM.AddEvent(description + ": done");
     }
 }

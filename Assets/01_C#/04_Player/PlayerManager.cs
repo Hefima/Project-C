@@ -15,10 +15,19 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     //PlayerInfo
     [SerializeField]
-    public BasePlayerStats basePlayerStats;
+    public BaseStats playerBaseStats;
+    public BaseStats baseStats
+    {
+        get { return playerBaseStats; }
+    }
+
     [SerializeField]
     public LivePlayerStats livePlayerStats;
-    public float currentHealth;
+    public float playerCurrentHealth;
+    public float currentHealth
+    {
+        get { return playerCurrentHealth; }
+    }
     //Level
     public int playerLevel;
     public float playerExp;
@@ -28,7 +37,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public GameObject avtiveQuests;
     //Others
     int ticks = 0;
-    bool eating;
+    public bool eating;
 
     void Awake()
     {
@@ -43,8 +52,7 @@ public class PlayerManager : MonoBehaviour, IDamagable
     private void Start()
     {
         GetLivePlayerStats();
-
-        currentHealth = basePlayerStats.maxHealth;
+        playerCurrentHealth = baseStats.maxHealth;
         GameManager.acc.UI.UpdateHealthUI();
         GameManager.acc.UI.UpdateExpUI();
 
@@ -67,11 +75,11 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     public void GetLivePlayerStats()
     {
-        livePlayerStats.maxHealth = basePlayerStats.maxHealth + (basePlayerStats.maxHealth_PL * playerLevel) + PInv.GetEquipHealth();
-        livePlayerStats.attackDamage = basePlayerStats.attackDamage + (basePlayerStats.attackDamage_PL * playerLevel) + PInv.GetEquipDamage();
-        livePlayerStats.attackSpeed = basePlayerStats.attackSpeed + (basePlayerStats.attackSpeed_PL * playerLevel) + PInv.GetEquipAttackSpeed();
-        livePlayerStats.defense = basePlayerStats.defense + (basePlayerStats.defense_PL * playerLevel) + PInv.GetEquipDefence();
-        livePlayerStats.agility = basePlayerStats.agility + PInv.GetEquipAgility();
+        livePlayerStats.maxHealth = baseStats.maxHealth + (baseStats.maxHealth_PL * playerLevel) + PInv.GetEquipHealth();
+        livePlayerStats.attackDamage = baseStats.attackDamage + (baseStats.attackDamage_PL * playerLevel) + PInv.GetEquipDamage();
+        livePlayerStats.attackSpeed = baseStats.attackSpeed + (baseStats.attackSpeed_PL * playerLevel) + PInv.GetEquipAttackSpeed();
+        livePlayerStats.defense = baseStats.defense + (baseStats.defense_PL * playerLevel) + PInv.GetEquipDefence();
+        livePlayerStats.agility = baseStats.agility + PInv.GetEquipAgility();
 
         GameManager.acc.UI.UpdateHealthUI();
         GameManager.acc.UI.statsUI.UpdateStatsUI();
@@ -99,13 +107,15 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
         GameManager.acc.UI.UpdateExpUI();
         GetLivePlayerStats();
+
+        GameManager.acc.EM.AddEvent("Level UP " + playerLevel);
     }
 
     public void TakeDamage(float damage)
     {
         float actualDamage = damage / (1 + livePlayerStats.defense / 100);
 
-        currentHealth -= actualDamage;
+        playerCurrentHealth -= actualDamage;
         GameManager.acc.UI.UpdateHealthUI();
 
         if (currentHealth <= 0)
@@ -114,10 +124,10 @@ public class PlayerManager : MonoBehaviour, IDamagable
 
     public void GetHealth(float health)
     {
-        currentHealth += health;       
-        if (currentHealth > basePlayerStats.maxHealth)
+        playerCurrentHealth += health;       
+        if (currentHealth > livePlayerStats.maxHealth)
         {
-            currentHealth = basePlayerStats.maxHealth;
+            playerCurrentHealth = livePlayerStats.maxHealth;
         }
         GameManager.acc.UI.UpdateHealthUI();
     }
@@ -127,10 +137,17 @@ public class PlayerManager : MonoBehaviour, IDamagable
         DebugManager.DebugLog("U DIED!", DebugType.PLAYERDEBUG);
     }
 
-    public void AddFood(int _restoreHealthValue, int _tickAmount, float _restoreTickTime)
+    public bool AddFood(int _restoreHealthValue, int _tickAmount, float _restoreTickTime)
     {
-        if(!eating)
+        if (!eating)
+        {
             StartCoroutine(AddFoodCourutine(_restoreHealthValue, _tickAmount, _restoreTickTime));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     IEnumerator AddFoodCourutine(int _restoreHealthValue, int _tickAmount, float _restoreTickTime)
@@ -155,5 +172,10 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public void OnEnemyKilled(object sender, EventManager.OnEnemyKilledEventArgs e)
     {
         GetExperience(e.experience);
+    }
+
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawLine(PC.BC.attackPoint.position, PC.BC.attackPoint.position + PC.BC.attackPoint.forward * 10);
     }
 }

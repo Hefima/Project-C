@@ -15,7 +15,7 @@ public class StatsUI : MonoBehaviour
         defenceUI.text = PlayerManager.acc.livePlayerStats.defense.ToString("0.00");
         agilityUI.text = PlayerManager.acc.livePlayerStats.agility.ToString("0.00");
 
-       float atkSpeed = PlayerManager.acc.basePlayerStats.baseAtkSpeed + PlayerManager.acc.livePlayerStats.attackSpeed / 100;
+       float atkSpeed = PlayerManager.acc.baseStats.baseAtkSpeed + PlayerManager.acc.livePlayerStats.attackSpeed / 100;
 
        dpsUI.text = (PlayerManager.acc.livePlayerStats.attackDamage * atkSpeed).ToString("0.00");
     }

@@ -11,7 +11,7 @@ public class Quest : MonoBehaviour
     [TextArea]
     public string description;
     public int experienceReward;
-    public List<ItemObject> itemRewards;
+    public List<ItemObject> itemRewards = new List<ItemObject>();
     public bool completed;
 
     public void CheckGoals()
@@ -21,15 +21,17 @@ public class Quest : MonoBehaviour
 
     public void GiveReward()
     {
-        Debug.Log("Hunting Beni Done");
+        DebugManager.DebugLog("Quest :" + questName + " is Complete");
         PlayerManager.acc.GetExperience(experienceReward);
-        //if(itemRewards.Count > 0)
-        //{
-        //    for (int i = 0; i < itemRewards.Count; i++)
-        //    {
-        //        PlayerManager.acc.PInv.inventory.AddItem(itemRewards[i]);
-        //    }
-        //}
+        if(itemRewards.Count != 0)
+        {
+            for (int i = 0; i < itemRewards.Count; i++)
+            {
+                PlayerManager.acc.PInv.inventory.AddItem(itemRewards[i]);
+            }
+        }
+        GameManager.acc.EM.AddEvent("Quest : " + questName + " completed");
 
+        Destroy(this);
     }
 }

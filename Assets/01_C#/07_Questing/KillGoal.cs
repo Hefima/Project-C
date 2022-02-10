@@ -28,7 +28,6 @@ public class KillGoal : QuestGoal
         {
             currentAmount++;
             CheckIfDone();
-            Debug.Log(currentAmount);
         }
     }
 }

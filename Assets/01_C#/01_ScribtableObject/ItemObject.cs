@@ -8,8 +8,11 @@ public enum ItemType
 }
 public abstract class ItemObject: ScriptableObject
 {
+    public int ID;
     public new string name;
     public ItemType type;
+    [Range(0,5)]
+    public int rarity;
     public int maxCarryAmount = 1;
 
     [Header("GFX")]

@@ -38,12 +38,12 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
         {
             CalculateComboBonus();
 
-            attackCD = 1 / (PlayerManager.acc.basePlayerStats.baseAtkSpeed + (PlayerManager.acc.livePlayerStats.attackSpeed + PlayerManager.acc.livePlayerStats.bonusAttackSpeed) / 100);
+            attackCD = 1 / (PlayerManager.acc.baseStats.baseAtkSpeed + (PlayerManager.acc.livePlayerStats.attackSpeed + PlayerManager.acc.livePlayerStats.bonusAttackSpeed) / 100);
 
             attackBuffer = Time.time + attackCD + attackDuration;
             nextAttack = Time.time + attackCD;
 
-            this.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.cam.transform.eulerAngles.y, 0f);
+            gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.cam.transform.eulerAngles.y, 0f);
 
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, PlayerManager.acc.PM.cam.transform.eulerAngles.y, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
@@ -117,7 +117,7 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }

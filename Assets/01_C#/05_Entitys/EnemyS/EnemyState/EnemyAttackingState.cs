@@ -19,7 +19,7 @@ public class EnemyAttackingState : EnemyBaseState
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         attackPoint = enemy.attackpoint;
 
-        navMesh.speed = enemyObj.GetComponent<EnemyManager>().enemyStats.moveSpeed * 2;
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility * 2;
         nextAttack = Time.time;
 
         DebugManager.DebugLogWarning(enemyObj.name + ": Attacking State", DebugType.ENEMYDEBUG);
@@ -65,9 +65,9 @@ public class EnemyAttackingState : EnemyBaseState
         if(Time.time >= nextAttack)
         {
             //Set Stats
-            attackRange = enemyObj.GetComponent<EnemyManager>().enemyStats.attackRange;
+            attackRange = enemyObj.GetComponent<EnemyManager>().attackRange;
 
-            attackCD = 1 / (PlayerManager.acc.basePlayerStats.baseAtkSpeed + enemyObj.GetComponent<EnemyManager>().enemyStats.attackSpeed / 100);
+            attackCD = 1 / (PlayerManager.acc.baseStats.baseAtkSpeed + enemyObj.GetComponent<EnemyManager>().baseStats.attackSpeed / 100);
             nextAttack = Time.time + attackCD;
 
             bool playerHit = Physics.CheckSphere(attackPoint.position, attackRange, enemyObj.GetComponent<EnemyStateManager>().playerMask);
@@ -80,7 +80,7 @@ public class EnemyAttackingState : EnemyBaseState
             if (playerHit)
             {
                 DebugManager.DebugLog("YOU HIT: Player", DebugType.ENEMYDEBUG);
-                PlayerManager.acc.TakeDamage(enemyObj.GetComponent<EnemyManager>().enemyStats.attackDamage);
+                PlayerManager.acc.TakeDamage(enemyObj.GetComponent<EnemyManager>().baseStats.attackDamage);
             }
         }
     }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,12 @@ public class UIManager : MonoBehaviour
     public Slider expSlider;
     public Text expText;
     public Text levelText;
+
+    //Abilities
+    public Image abiilityI;
+    public Image abiilityII;
+    public Image abiilityIII;
+    public Image ultimate;
 
     public void ToggleUI(GameObject ui)
     {
@@ -48,5 +53,44 @@ public class UIManager : MonoBehaviour
         expText.text = Mathf.Round(PlayerManager.acc.playerExp) + "/" + Mathf.Round(PlayerManager.acc.playerExpMax);
 
         levelText.text = PlayerManager.acc.playerLevel.ToString();
+    }
+
+    public void UpdateAbilityUI(int _abilityID, float _cooldown)
+    {
+        switch (_abilityID)
+        {
+            default:
+                break;
+            case 1:
+                StartCoroutine(UseAbility(abiilityI, _cooldown));
+                break;
+            case 2:
+                StartCoroutine(UseAbility(abiilityII, _cooldown));
+                break;
+            case 3:
+                StartCoroutine(UseAbility(abiilityIII, _cooldown));
+                break;
+            case 4:
+                StartCoroutine(UseAbility(ultimate, _cooldown));
+                break;
+        }
+    }
+
+    IEnumerator UseAbility(Image _abilityImage, float _cooldown)
+    {
+        _abilityImage.fillAmount = 1;
+
+        float elapsedTime = 0;
+        float waitTime = _cooldown;
+
+        while (_abilityImage.fillAmount > 0)
+        {
+            _abilityImage.fillAmount = Mathf.Lerp(1, 0, (elapsedTime / waitTime));
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
     }
 }

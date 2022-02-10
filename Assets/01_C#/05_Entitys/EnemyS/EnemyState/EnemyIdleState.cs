@@ -22,7 +22,7 @@ public class EnemyIdleState : EnemyBaseState
         enemyObj = enemy.gameObject;
         navMesh = enemyObj.GetComponent<NavMeshAgent>();
         enemy.startPos = enemyObj.transform;
-        navMesh.speed = enemyObj.GetComponent<EnemyManager>().enemyStats.moveSpeed;
+        navMesh.speed = enemyObj.GetComponent<EnemyManager>().baseStats.agility;
         navMesh.stoppingDistance = enemy.stopDis;
 
         DebugManager.DebugLogWarning(enemyObj.name + ": Idle State", DebugType.ENEMYDEBUG);

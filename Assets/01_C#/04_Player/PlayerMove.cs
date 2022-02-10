@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour
     public Animator anim;
 
     //Move
+    public Vector2 input;
     Vector3 move;
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
@@ -16,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     //Jump
     public bool jumpPressed = false;
     public bool isJumping;
-    float initialJumpVelocity;
+    public float initialJumpVelocity;
     public float maxJumpHeight = 1f;
     public float maxJumpTime = 0.5f;
 
@@ -24,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     float fallTime;
 
     //Gravity
-    Vector3 velocity;
+    public Vector3 velocity;
     public float gravity = -10f;
 
     //GroundCheck
@@ -73,20 +74,18 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        Vector2 input = new Vector2(GameManager.acc.IK.AxisX, GameManager.acc.IK.AxisY).normalized;
+        input = new Vector2(GameManager.acc.IK.AxisX, GameManager.acc.IK.AxisY).normalized;
 
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
-
+        moveRotation.transform.eulerAngles = new Vector3(0f, cam.transform.eulerAngles.y, 0f);
         if (input.magnitude > 0.1f)
         {
             float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            moveRotation.transform.eulerAngles = new Vector3(0f, cam.transform.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);            
 
             move = moveRotation.transform.forward * input.y + moveRotation.transform.right * input.x;
 

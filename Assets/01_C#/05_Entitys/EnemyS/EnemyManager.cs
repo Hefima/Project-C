@@ -8,29 +8,40 @@ using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour, IDamagable
 {
     [SerializeField]
-    public EnemyStats enemyStats;
+    public BaseStats enemyBaseStats;
+    public BaseStats baseStats
+    {
+        get { return enemyBaseStats; }
+    }
+    public int experience;
+
+    public float attackRange;
     NavMeshAgent navMesh;
 
-    public float currentHealth;
+    public float enemyCurrentHealth;
+    public float currentHealth
+    {
+        get { return enemyCurrentHealth; }
+    }
 
     public Slider healthSlider;
 
     void Start()
     {
-        currentHealth = enemyStats.health;
+        enemyCurrentHealth = baseStats.maxHealth;
         navMesh = GetComponent<NavMeshAgent>();
 
         if(navMesh != null)
         {
-            navMesh.speed = enemyStats.moveSpeed;
+            navMesh.speed = baseStats.agility;
         }
         UpdateHealthUI();
     }
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
+        enemyCurrentHealth -= damage;
+        if (enemyCurrentHealth <= 0)
             Die();
         UpdateHealthUI();
     }
@@ -38,12 +49,12 @@ public class EnemyManager : MonoBehaviour, IDamagable
     void Die()
     {
         Destroy(this.gameObject);
-        GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = enemyStats.experience, enemyID = enemyStats.ID });        
+        GameManager.acc.EM.FireOnEnemyKilledEvent(this, new EventManager.OnEnemyKilledEventArgs { experience = this.experience, enemyID = baseStats.ID });        
     }
 
     void UpdateHealthUI()
     {
-        healthSlider.maxValue = enemyStats.health;
-        healthSlider.value = currentHealth;
+        healthSlider.maxValue = baseStats.maxHealth;
+        healthSlider.value = enemyCurrentHealth;
     }
 }

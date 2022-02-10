@@ -9,7 +9,7 @@ public class PlayerAnimations : MonoBehaviour
     public IEnumerator Punsh(string punsh)
     {
         animator.SetLayerWeight(1, 1);
-        animator.SetFloat("punsh_speed",  1 + 1 / (1 / (PlayerManager.acc.basePlayerStats.baseAtkSpeed + PlayerManager.acc.livePlayerStats.attackSpeed / 100)));
+        animator.SetFloat("punsh_speed",  1 + 1 / (1 / (PlayerManager.acc.baseStats.baseAtkSpeed + PlayerManager.acc.livePlayerStats.attackSpeed / 100)));
         animator.SetTrigger(punsh);
 
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(1).IsName(punsh));

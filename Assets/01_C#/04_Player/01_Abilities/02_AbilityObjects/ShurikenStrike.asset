@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a329d4b9d872b4d94bed29a600cd36, type: 3}
+  m_Name: ShurikenStrike
+  m_EditorClassIdentifier: 
+  name: ShurikenStrike
+  coldownTime: 5
+  activeTime: 1
+  abilityHolder:
+    abilityID: 2
+    ability: {fileID: 11400000}
+    parent: {fileID: 0}
+    state: 0
+  dashVelocity: 30
+  dashTime: 0.5
+  shuriken: {fileID: 1536574948163499670, guid: 2237413e7bfa3a042b4e76048e7915bb, type: 3}
+  shurikenAmount: 5
+  shurikenSpeed: 60
+  timeBetweenShuriken: 0.1
+  shurikenDamageMultiplier: 1

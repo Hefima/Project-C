@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca476a8c103908741b1b78bdb06ced4a, type: 3}
+  m_Name: Execute
+  m_EditorClassIdentifier: 
+  name: Execution
+  coldownTime: 8
+  activeTime: 2
+  abilityHolder:
+    abilityID: 3
+    ability: {fileID: 11400000}
+    parent: {fileID: 0}
+    state: 0
+  attackRange: 10
+  damageMultiplier: 2
+  executeThreshhold: 0.3
+  executeDelay: 1.2
+  executeObj: {fileID: 6282249505656720176, guid: 56dd9dabd9b05874aa6c8ebf17e057d3, type: 3}

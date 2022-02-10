@@ -13,5 +13,19 @@ public class InventoryUI : MonoBehaviour
         }
         else
             DebugManager.DebugLog("Item image Missing: " + _slotHolder.info.item.name, DebugType.ITEMDEBUG);
+
+        if(_slotHolder.info.amount > 1)
+        {
+            _slotHolder.countTxt.text = _slotHolder.info.amount.ToString();
+        }
+        else
+        {
+            _slotHolder.countTxt.text = null;
+        }
+
+        if (_slotHolder.isEquipSlot)
+        {
+            _slotHolder.removeButton.interactable = false;
+        }
     }
 }

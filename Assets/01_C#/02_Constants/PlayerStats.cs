@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct BasePlayerStats
+public struct BaseStats
 {
+    public int ID;
+    [Space(5)]
     public int maxHealth;
     public int maxHealth_PL;
     [Space(5)]

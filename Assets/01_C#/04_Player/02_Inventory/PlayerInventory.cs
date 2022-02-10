@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
-        inventory.OnSlotCreate += OnSlotCreate;
+        GameManager.acc.EM.OnSlotCreate += OnSlotCreate;
         AddEquipSlots();
     }
 
@@ -83,7 +83,7 @@ public class PlayerInventory : MonoBehaviour
         return combinedAgility;
     }
 
-    public void OnSlotCreate(object sender, InventoryObject.OnSlotCreateEventArgs e)
+    public void OnSlotCreate(object sender, EventManager.OnSlotCreateEventArgs e)
     {
         GameObject g = Instantiate(slotPrefab, parentTransform);
         g.GetComponent<InventorySlotHolder>().info = e.slot;

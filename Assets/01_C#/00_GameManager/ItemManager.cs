@@ -1,14 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class ItemManager : MonoBehaviour
 {
-    public List<RessourceObject> ressourceObjects = new List<RessourceObject>();
-    public List<ConsumableObject> consumableObjects = new List<ConsumableObject>();
     public List<EquipmentObject> equipmentObjects = new List<EquipmentObject>();
+    public List<ConsumableObject> consumableObjects = new List<ConsumableObject>();
+    public List<RessourceObject> ressourceObjects = new List<RessourceObject>();
 
     public GameObject itemPrefab;
+
+    private void Start()
+    {
+        SetUpItems(ref equipmentObjects);
+        SetUpItems(ref consumableObjects);
+        SetUpItems(ref ressourceObjects);
+    }
+
+    void SetUpItems<T>(ref List<T> list) where T : ItemObject
+    {
+        list = list.Distinct().ToList();
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            string id;
+            id = "" + (int)list[i].type + list[i].rarity + i;
+
+            list[i].ID = int.Parse(id);
+        }
+    }
 
     public ItemObject RandomItem_Type(ItemType itemType)
     {

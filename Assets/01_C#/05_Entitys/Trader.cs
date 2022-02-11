@@ -63,6 +63,7 @@ public class Trader : MonoBehaviour, IInteractable
         assigned = true;
         quest = (Quest)PlayerManager.acc.avtiveQuests.AddComponent(System.Type.GetType(questType));
         traderUi.ChangeQuestButton(questBtn, "Finish");
+        GameManager.acc.EM.AddEvent("Quest : " + questType + " accepted");
     }
 
     void CheckQuest()

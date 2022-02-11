@@ -103,8 +103,8 @@ public class PlayerInventory : MonoBehaviour
             if(inventory.inventorySlots[i].item.type == ItemType.Consumable)
             {
                 inventory.inventorySlots[i].item.Use(inventory.inventorySlots[i]);
+                break;
             }
-            break;
         }
     }
 

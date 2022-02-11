@@ -102,14 +102,16 @@ public class PlayerManager : MonoBehaviour, IDamagable
     public void LevelUp(float expOverflow)
     {
         playerLevel++;
-        playerExp = expOverflow;
+
 
         playerExpMax = playerExpMax * levelIncrease;
 
         GameManager.acc.UI.UpdateExpUI();
         GetLivePlayerStats();
 
+        GetExperience(expOverflow);
         GameManager.acc.EM.AddEvent("Level UP " + playerLevel);
+        return;
     }
 
     public void TakeDamage(float damage)

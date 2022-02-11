@@ -37,6 +37,9 @@ public class InputKeys : MonoBehaviour
                 case "O":
                     GameManager.acc.UI.ToggleUI(GameManager.acc.UI.questUIObject);
                     break;
+                case "H":
+                    PlayerManager.acc.PInv.QuickUseConsumable();
+                    break;
                 case "1":
                     PlayerManager.acc.PC.AbilityI();
                     break;

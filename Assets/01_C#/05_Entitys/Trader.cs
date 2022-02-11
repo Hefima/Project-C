@@ -13,12 +13,27 @@ public class Trader : MonoBehaviour, IInteractable
     //Ui
     public ButtonHolder questBtn;
     public TraderUi traderUi;
+    public GameObject traderUIObject;
 
     public void Start()
     {
-        StartCoroutine(traderUi.CreateQuestUI(questType, this));
+        StartCoroutine(Initialize());
     }
 
+
+    IEnumerator Initialize()
+    {
+        yield return StartCoroutine(CreateCanvas());
+
+        yield return StartCoroutine(traderUi.CreateQuestUI(questType, this));
+    }
+    IEnumerator CreateCanvas()
+    {
+        GameObject g = Instantiate(traderUIObject, GameManager.acc.UI.UICanvas.transform);
+
+        traderUi = g.GetComponent<TraderUi>();
+        yield return null;
+    }
     public void AssigntButton()
     {
         questBtn.btn.onClick.AddListener(ButtonPressed);

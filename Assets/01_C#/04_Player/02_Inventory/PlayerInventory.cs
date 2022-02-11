@@ -96,6 +96,18 @@ public class PlayerInventory : MonoBehaviour
         return combinedAgility;
     }
 
+    public void QuickUseConsumable()
+    {
+        for (int i = 0; i < inventory.inventorySlots.Count; i++)
+        {
+            if(inventory.inventorySlots[i].item.type == ItemType.Consumable)
+            {
+                inventory.inventorySlots[i].item.Use(inventory.inventorySlots[i]);
+            }
+            break;
+        }
+    }
+
     public void OnSlotCreate(object sender, EventManager.OnSlotCreateEventArgs e)
     {
         GameObject g = Instantiate(slotPrefab, parentTransform);

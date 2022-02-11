@@ -19,8 +19,8 @@ MonoBehaviour:
     abilityID: 3
     ability: {fileID: 11400000}
     parent: {fileID: 0}
-    state: 0
-  attackRange: 10
+    state: 1
+  attackRange: 50
   damageMultiplier: 2
   executeThreshhold: 0.3
   executeDelay: 1.2

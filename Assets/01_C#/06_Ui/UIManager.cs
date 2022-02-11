@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     public GameObject questUIObject;
     public GameObject pauseUIObject;
 
+    public GameObject UICanvas;
+
     public GameObject gameOver;
 
     //HealthBar

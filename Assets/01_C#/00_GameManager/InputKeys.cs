@@ -21,7 +21,14 @@ public class InputKeys : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.acc.UI.TogglePause();
+            if (GameManager.acc.UI.uiOpen)
+            {
+                GameManager.acc.UI.CloseAllUI();
+            }
+            else
+            {
+                GameManager.acc.UI.TogglePause();
+            }           
         }
 
         if (Input.anyKeyDown)

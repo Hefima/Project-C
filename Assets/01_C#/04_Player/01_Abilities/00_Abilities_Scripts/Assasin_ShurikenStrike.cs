@@ -6,6 +6,7 @@ using UnityEngine;
 public class Assasin_ShurikenStrike : Ability
 {
     public float dashVelocity;
+    public float jumpVelocityMultiplier;
     public float dashTime;
     //Shuriken
     public GameObject shuriken;
@@ -26,13 +27,15 @@ public class Assasin_ShurikenStrike : Ability
     {
         int shuriken = 0;
 
+        PlayerManager.acc.PM.moveAllowed = false;
+
         //Dash Back
         PlayerManager.acc.PM.velocity = -PlayerManager.acc.PM.moveRotation.transform.forward * dashVelocity;
         abilityHolder.parent.StartCoroutine(EndDash(dashTime));
 
-        ////Jump (when Cam Fixed to player)
-        //PlayerManager.acc.PM.isJumping = true;
-        //PlayerManager.acc.PM.velocity.y = PlayerManager.acc.PM.initialJumpVelocity;
+        //Jump (when Cam Fixed to player)
+        PlayerManager.acc.PM.isJumping = true;
+        PlayerManager.acc.PM.velocity.y = PlayerManager.acc.PM.initialJumpVelocity * jumpVelocityMultiplier;
 
         PlayerManager.acc.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.moveRotation.transform.eulerAngles.y, 0f);
 
@@ -43,6 +46,8 @@ public class Assasin_ShurikenStrike : Ability
 
             yield return new WaitForSeconds(timeBetweenShuriken);
         }
+
+        PlayerManager.acc.PM.moveAllowed = true;
     }
 
     IEnumerator EndDash( float time)

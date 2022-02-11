@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dash
   coldownTime: 2
-  activeTime: 0.5
+  activeTime: 0.3
   abilityHolder:
+    abilityID: 1
     ability: {fileID: 11400000}
     parent: {fileID: 0}
-    state: 2
-  dashVelocity: 30
+    state: 0
+  dashVelocity: 40

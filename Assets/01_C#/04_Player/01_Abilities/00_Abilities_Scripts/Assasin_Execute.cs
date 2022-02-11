@@ -17,7 +17,7 @@ public class Assasin_Execute : Ability
     public override void Activate()
     {
         base.Activate();
-
+        activeTime = executeDelay;
         abilityHolder.parent.StartCoroutine(Execute());
     }
 
@@ -27,6 +27,8 @@ public class Assasin_Execute : Ability
         PlayerManager.acc.gameObject.transform.rotation = Quaternion.Euler(0f, PlayerManager.acc.PM.moveRotation.transform.eulerAngles.y, 0f);
 
         PlayerManager.acc.PM.moveAllowed = false;
+        PlayerManager.acc.PM.StopWalking();
+
 
         GameObject g = Instantiate(executeObj, PlayerManager.acc.PC.BC.attackPoint.position, PlayerManager.acc.PC.BC.attackPoint.rotation);
 

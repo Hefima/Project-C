@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject gameOver;
 
+
+    public List<GameObject> openUIList;
+    public bool uiOpen;
     //HealthBar
     public Slider healthSlider;
     public Text healthText;
@@ -33,6 +37,36 @@ public class UIManager : MonoBehaviour
     public Image abiilityIII;
     public Image ultimate;
 
+    void CheckOpenUi()
+    {
+        if(openUIList.Count > 0)
+        {
+            for (int i = 0; i < openUIList.Count; i++)
+            {
+                uiOpen = true;
+            }
+        }
+        else
+        {
+            uiOpen = false;
+        }
+    }
+
+    public void CloseAllUI()
+    {
+        if (openUIList.Count > 0)
+        {
+            for (int i = 0; i < openUIList.Count; i++)
+            {
+                openUIList[i].SetActive(false);                               
+            }
+            GameManager.acc.UI.toolTip.Hide();
+            Cursor.lockState = CursorLockMode.Locked;
+            uiOpen = false;
+            PlayerManager.acc.PM.moveAllowed = true;
+        }
+    }
+
     public void ToggleUI(GameObject ui)
     {
         if (ui.activeInHierarchy)
@@ -43,6 +77,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            uiOpen = true;
+            openUIList.Add(ui);
             ui.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         }

@@ -19,11 +19,12 @@ MonoBehaviour:
     abilityID: 2
     ability: {fileID: 11400000}
     parent: {fileID: 0}
-    state: 0
+    state: 2
   dashVelocity: 30
+  jumpVelocityMultiplier: 1.5
   dashTime: 0.5
   shuriken: {fileID: 1536574948163499670, guid: 2237413e7bfa3a042b4e76048e7915bb, type: 3}
   shurikenAmount: 5
-  shurikenSpeed: 60
+  shurikenSpeed: 100
   timeBetweenShuriken: 0.1
   shurikenDamageMultiplier: 1

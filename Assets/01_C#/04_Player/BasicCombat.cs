@@ -27,7 +27,13 @@ public class BasicCombat : MonoBehaviour, IBasicAttacks
     }
 
     public void BasicAttack()
-    {      
+    {
+        if (!PlayerManager.acc.PM.moveAllowed)
+        {            
+            return;
+        }
+
+
         if (Time.time >= attackBuffer)
         {
             basicAttack = 0;

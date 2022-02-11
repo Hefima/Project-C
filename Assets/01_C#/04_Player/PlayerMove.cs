@@ -50,6 +50,7 @@ public class PlayerMove : MonoBehaviour
     {
         GroundCheck();
         Jump();
+        moveRotation.transform.eulerAngles = new Vector3(0f, cam.transform.eulerAngles.y, 0f);
     }
     public void PlayerMoveFixedUpdate()
     {
@@ -80,19 +81,19 @@ public class PlayerMove : MonoBehaviour
         {
             velocity.y = -2f;
         }
-        moveRotation.transform.eulerAngles = new Vector3(0f, cam.transform.eulerAngles.y, 0f);
+        
         if (input.magnitude > 0.1f)
         {
             float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);            
-
+                        
             move = moveRotation.transform.forward * input.y + moveRotation.transform.right * input.x;
 
             if (GameManager.acc.IK.input_Shift && isGrounded && moveAllowed)
             {
                 anim.SetBool("isRunning", true);
                 controller.Move(move * (PlayerManager.acc.livePlayerStats.agility * 2) * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
             else if (moveAllowed)
             {
@@ -100,16 +101,22 @@ public class PlayerMove : MonoBehaviour
                     anim.SetBool("isWalking", true);
 
                 controller.Move(move * PlayerManager.acc.livePlayerStats.agility * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
         }
-        else
+        else if(!moveAllowed ||  input.magnitude <= 0.1)
         {
-            move = Vector3.zero;
-            anim.SetBool("isRunning", false);
-            anim.SetBool("isWalking", false);
+            StopWalking();
         }
 
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void StopWalking()
+    {
+        move = Vector3.zero;
+        anim.SetBool("isRunning", false);
+        anim.SetBool("isWalking", false);
     }
 
     void SetupJumpVariables()
